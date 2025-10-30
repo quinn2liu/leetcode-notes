@@ -1,5 +1,7 @@
 # Two Pointers
 
+**Things of note**
+
 observation: you move each pointer **programatically** based on some comparison. i.e. `if (condition 1)`, then move the left pointer. `if (condition 2)`, then move the right pointer.
 
 ## 15. Three Sum

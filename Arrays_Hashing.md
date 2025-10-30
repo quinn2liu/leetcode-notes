@@ -1,10 +1,14 @@
 # Arrays + Hashing
 
+**Things of note**
+
 Lambdas, Hashing with tuples vs lists, ord() for ascii
 
 To initialize empty array: `[""] * n`
 
 To initialize empty 2d array: `[[""] * n for i in range(n)]`
+
+`ord(char)` -> returns unicode character for the given char. if you want relative to the alphabet, use `ord(char) - ord('a')` 
 
 ## 1. Two Sum
 
@@ -18,6 +22,11 @@ Return the answer with the smaller index first.
 
 To reduce complexity, you iterate through each value and then calculate it's subsequent "target pair" (target - value). Then, iterate through the remainder of the list and see if this "target pair" exists. If it does then you have your two values.
 
+^^ brute force (O(n^2))
+
+Better solution: make a pass through the array, creating a dict where keys are the nums and its index as the value. Then iterating through the dict's keys, calculate "target pair" (target - value) and search for it's existence in the dict. If the target pair exists, return it's corresponding index.
+- a less-intuitive but more-optimized solution is do one pass, and check whether the "target pair" exists in the up-to-date dict. This is because since there are a pair of values, if you search behind for a num's pair and don't find it, the pair will be later in the list and when searching back through, will find it's pair from earlier in the array. 
+
 ## 49. Group Anagrams
 
 Given an array of strings `strs`, group all anagrams together into sublists. You may return the output in any order.
@@ -29,6 +38,8 @@ An anagram is a string that contains the exact same characters as another string
 The overall idea is to create a list that keep's track of the count of each character in a word. Then, using that as a key, we can add strings that have the same letter counts.
 
 Key point, however, is that in Python, lists are not-hashable. To avoid this, we can convert our frequency list into a tuple, which can be used as a key for a hash map.
+
+
 
 ## 347. Top K Frequent Elements
 
