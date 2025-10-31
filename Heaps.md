@@ -6,6 +6,7 @@ can use `[ ]` as both a min and max heap via the **heapq** library
 - `[ ]` is initialized as a min heap (smallest element on top).
 - if you want to optimize a max heap (largest element on top), you can `heappush(heap, -1 * num)`, so that the largest element is the top.
 - pop using `heappop(heap)`
+- pushing and popping from a heap are both O(log n) operations
 
 ## 295. Find Median from Data Stream
 

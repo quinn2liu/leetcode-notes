@@ -2,13 +2,12 @@
 
 **Things of note**
 
-Lambdas, Hashing with tuples vs lists, ord() for ascii
-
-To initialize empty array: `[""] * n`
-
-To initialize empty 2d array: `[[""] * n for i in range(n)]`
-
-`ord(char)` -> returns unicode character for the given char. if you want relative to the alphabet, use `ord(char) - ord('a')` 
+- Lambdas, Hashing with tuples vs lists, ord() for ascii
+- To initialize empty array: `[""] * n`
+- To initialize empty 2d array: `[[""] * n for i in range(n)]`
+- `ord(char)` -> returns unicode character for the given char. if you want relative to the alphabet, use `ord(char) - ord('a')` 
+- when you are traversing a list and are allowed O(n) space, probably storing some copy/information about the original input list as a hashmap/hashset/another list.
+    - O(n) time can be 2 pointers, sliding window, or if you have O(n) space then some form of hash map/set (because those have O(1)) lookups.
 
 ## 1. Two Sum
 
@@ -55,7 +54,16 @@ If you want to sort a dictionary based on it's values, you can use the dict(sort
 
 `sortedDict = dict(sorted(yourDictionaryHere.items(), key = lambda item: item[1], reverse = True))`
 
-What's happening here is that `sorted()` requires an iterable to then sort. Since our iterable here is a tuple essentially a tuple, we use the `key` parameter to specify what we want to sort by. To sort by values, we use a lambda function that says for any input, denoted as item, we return item[1] (the second item in the tuple). 
+What's happening here is that `sorted()` requires an iterable to then sort, so `yourDictionaryHere.items()` converts the dictionary into a list of tuples. We use the `key` parameter to specify what we want to sort by. To sort by values, we use a lambda function that says for any input, denoted as item, we return item[1] (the second item in the tuple). 
+
+**Runtime**: 
+- sorting -> O(nlogn) from sorting
+- heap -> O(klogn) k * time per heappop
+- bubble sort -> O(n)
+
+If you want to get fancy, you can maintain a max heap (min heap times -1), and heappop k times.
+
+If you want to get fancy fancy, you can use a bubble sort. Store a fixed-size list of where the index con the numbers that have that index's frequency. The size of this list is = to the size of the input array. For example, index 2 contains a list of numbers that have frequency 2. This is O(n) space and nice because we just care about which numbers have the highest frequency.
 
 ## 271. Encode and Deocde Strings
 
@@ -125,6 +133,9 @@ Here, the solution is essentially iterating through the list twice.
 On the first pass, res[i] is the previous value in res times it's corresponding value in nums. This means that by the end, `res[len(nums)]` is the product of all the numbers in nums before it, aka the prefix.
 
 In the second pass, it essentially goes backwards and finds the "postfix", or the product of the numbers after any given index `i`.
+
+**Okay better solution to ^^**
+Prefix and suffix arrays. Make 2 passes through the array (forward and backwards, respectively) where prefix[i] is the product of all values before i, not including i. Same logic for suffix. Then `return [prefix[i] * suffix[i] for i in range(len(nums))]`
 
 ## 128. Longest Consecutive Sequence
 
