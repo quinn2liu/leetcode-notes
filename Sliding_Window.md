@@ -8,6 +8,8 @@ The window is maintained by 2 pointers, similar to the Two-Pointers technique. T
 
 Most of the time, you start by expanding the window until the window is no longer valid. Then you move the left pointer to shrink the window until it's valid again.
 
+*Generally*, in case you need to keep track of the frequencies of some items using a dict. A nice way to add an element for the first time without an `if` statement is `myDict[key] = 1 + myDict.get(key, 0)`
+
 # 3. Longest Substring Without Duplicates
 
 Given a string s, find the length of the longest substring without duplicate characters.
@@ -28,7 +30,7 @@ When there are no more duplicates, we then add `s[r]` to our set and then recalc
 
 This means that on the next iteration of r, we can say: "we know that [l:r - 1] has no duplicates and we've already checked if that length is the max. we will check if `s[r]` is a duplicate, if so we will move `l` until `s[r]` is no longer a duplicate, check it's length, and then repeat."
 
-## 424 Longest Repeating Substring with Replacement
+# 424. Longest Repeating Substring with Replacement
 
 You are given a string `s` consisting of only uppercase english characters and an integer `k`. You can choose up to `k` characters of the string and replace them with any other uppercase English character.
 
@@ -58,4 +60,33 @@ While this quantity is `> k`, the left pointer is moved until we have met this c
         
         return res
 
+# 76. Minimum Window Substring
 
+Given two strings `s` and `t` of lengths m and n respectively, return the minimum window substring of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+### Key Takeaways
+As is with most sliding window problems, we need to maintain an extra data structure to achieve that O(n) runtime.
+
+- In this case we'll have a hashmap that represents the frequencies of characters in `t` (`t_freq`), and another that has the frequencies of the characters that are currently in our `window`. 
+- Additionally, we'll have two integers `need` and `have`, where `need` represents the number of characters in `t` that need to be present in the window, and `have` represents the # of characters needed that are in the present window. 
+- Lastly we track our result with `res = [0, 0]` and `res_len = float('inf')`
+
+Like other 2 pointers algorithms, we grow the right pointer until we have reached our success criteria, then shift the left pointer until the criteria has no longer been met.
+
+With left and right pointers, `l = 0`, and we iterate `r` from `0` to `len(s)`. We first add `s[r]` to `window`. Then, if `s[r]` exists in `t_freq`, we check whether `window[s[r] == t_freq[s[r]]`. If so, then `have += `.
+
+After adding `s[r]` to `window` and updating `have`, we do a `while have == need` loop. This means that we've found a valid substring. Here we update `res` and `res_len` with
+
+    while have == need:
+        if res_len > r - l + 1:
+            res = [l, r]
+            res_len = r - l + 1
+        
+        window[s[l]] -= 1
+        if if s[l] in t_dict and window[s[l]] < need[s[l]]:
+            have -= 1
+        
+        l += 1
+
+This shrinks our window (as we want the smallest substring), while still maintaining that we are tracking the shortest valid substring.
+    
