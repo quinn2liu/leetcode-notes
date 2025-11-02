@@ -1,12 +1,18 @@
 # Trees
 
-## NOTES
+## Things of Note
 
 There are several ways to traverse a tree.
 
 ![Alt text](https://media.geeksforgeeks.org/wp-content/uploads/20240429140116/Tree-Traversal-Techniques-(1).webp)
 
 - BFS does level-order traversal, whereas DFS can be any of the other 3.
+
+**Implement BFS using a queue, DFS using recursion.**
+
+**BFS Template**
+
+**DFS Template**
 
 ### Binary Search Tree
 
@@ -26,7 +32,7 @@ Definition for a binary tree node.
 
 ### Key Takeaways
 
-So the main thing to remember here is how we use recursion to our advantage. If we're trying to reverse the tree, we can simply invert each of the subtrees of our root. Once we reach a leaf (where `root == None`), then we return `None` and go back up the tree.
+So the main thing to remember here is how we use recursion to our advantage. If we're trying to reverse the tree, we can simply invert each of the subtrees of our root. Once we reach a leaf (where `root == None`), then we return `None` and go back up the tree. This is a depth-first search approach (exploring tree up to a leaf node).
 
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         
@@ -41,6 +47,13 @@ So the main thing to remember here is how we use recursion to our advantage. If 
         return root
 
 So traditionally, when this is implemented in Java, you set `node.left = invertTree(root.right)`. In Python, you don't need to do this because we are calling `self.invertTree()`, which has access to the original instance of `root`, and any changed to the children of `root` are present for `root` itself.
+
+**Note** the structre of the recursion. 
+1. First you check the base case (conditions that terminate the recursion). 
+    - In this case, we want to stop making recursive calls once root becomes none (we've found a leaf). 
+2. Then, we do the operations for this iteration (in this case swapping root.left and root.right). 
+3. Lastly, we make our recursive call *with new parameters*.
+    - This is what makees sure the recursion is working. We are updating the parameters so that the same subproblem is being solved.
 
 ## 104. Max Depth of Binary Tree
 
@@ -115,6 +128,36 @@ Here's the code to illustrate:
 
 The key intuition is the line `return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)`. This essentially says, we have evaluated that for the corresponding nodes `p` and `q`, `p.val` == `q.val`. So next we want to check whether the subtrees of `p` and `q` are equal by calling isSameTree() on the left subtrees (compare `p.left` and `q.left`) and the right subtrees (compare `p.right` and `q.right`).
 
+**BFS Approach**
+
+Similarly, you can do a level order travesal using BFS, can checking at each point whether the nodes are the same. Level order traversal (BFS) is implemented using a queue, which maintains the order in which nodes have been seen.
+
+This is implemented as follows:
+
+    def isSameTree(p: Node, q: Node):
+        pq = deque([p])
+        qq = deque([q])
+
+        while pq and qq:
+            pnode = pq.popleft()
+            qnode = qq.popleft()
+
+            # if the curr node is both None, then move onto next node
+            if not pnode and not qnode: 
+                continue
+            
+            # this case triggers when pnode or qnode is None when the other not, or the values are not the same
+            if not pnode or not qnode or pnode.val != qnode.val:
+                return False
+            
+            pq.append(pnode.left)
+            pq.append(pnode.right)
+            qq.append(qnode.left)
+            qq.append(qnode.right)
+
+        return True
+
+See the comments in the code for some things to note.
 ## 572. Subtree of Another Tree (Binary)
 
 Given the roots of two binary trees `root` and `subRoot`, return `true` if there is a subtree of `root` with the same structure and node values of `subRoot` and `false` otherwise.
@@ -128,12 +171,15 @@ This problem can be split into 2 parts. First is traversing the tree, and then a
 Remember from above, we can check whether 2 binary trees are equal using the following algorithm:
 
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        # reached base case (have traversed the trees to their ends, or leaves)
         if not p and not q:
             return True
         
+        # these nodes are equivalent, so we recurse the subtrees
         if (p and q) and (p.val == q.vall):
             return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
 
+        # p and q are not equivalent nodes, so not same tree
         return False
 
 Next, we need to traverse the root tree so that at each node, we check if the the resulting subtrees are equal. This is how we traverse the `root`:
@@ -153,6 +199,55 @@ Next, we need to traverse the root tree so that at each node, we check if the th
 
 Note, we return `isSubtree(root.left, subTree) **or** isSubtree(root.right, subTree)` because we only need one of the two to be true for our algorithm to be true.
 
+**BFS Approach**
+
+If we wanted to do a BFS approach, we can use the same approach:
+
+- Traverse the tree in any order so as we touch every node
+- At each node, check if the subtree at that node and the given tree are equivalent
+
+To check tree equivalence:
+
+    def isSameTree(p, q) -> bool:
+        pq = deque([p])
+        qq = deque([q])
+
+        while len(qq) > 0:
+            pnode = pq.popleft()
+            qnode = qq.popleft()
+
+            if not pnode and not qnode:
+                continue
+            if not pnode or not qnode or pnode.val != qnode.val:
+                return False
+            
+            pq.append(pnode.left)
+            pq.append(pnode.right)
+            qq.append(qnode.left)
+            qq.append(qnode.right)
+        return False
+
+Then, do a standard BFS traversal to get through each node:
+
+    def isSubtree(self, root: Optional[TreeNode], subTree: Optional[TreeNode]) -> bool:
+        if not subTree:
+            return True
+        rq = deque([root])
+
+        while rq:
+            rnode = rq.popleft()
+            if not rnode:
+                continue
+
+            if rq and rq.val == subTree.val:
+                if self.isSameTree(root, subTree):
+                    return True
+
+            rq.append(rnode.left)
+            rq.append(rnode.right)
+
+        return False
+
 ## 235. Lowest Common Ancestor (BST)
 
 Given a binary search tree (BST) where all node values are unique, and two nodes from the tree `p` and `q`, return the lowest common ancestor (LCA) of the two nodes.
@@ -170,6 +265,22 @@ However, if this isn't the case, we need to continue to traverse our tree. In th
     return self.leastCommonAncestor(root.left, p, q)
 
 In our base case, we know that the first `root` is a common ancestor, at the end we return `root`
+
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        if not root or not p or not q:
+            return None
+        
+        # root.val is larger than both p and q, a least common ancestor would exist on the left
+        if max(p.val, q.val) < root.val:
+            self.lowestCommonAncestor(root.left, p, q)
+        
+        # root.val is less than both p and q, least common ancestor would exist on the right
+        elif min(p.val, q.val) > root.val:
+            self.lowestCommonAncestor(root.right, p, q)
+
+        # root is in between (inclusive) p.val and q.val (no smaller common ancestor exists)
+        else:
+            return root
 
 ## 102. Binary Tree Level Order Traversal
 
@@ -206,6 +317,24 @@ Level-order traversal is essentially breadth-first search on a binary tree. At e
                     q.append(node.right)
             res.append(level)
         
+        return res
+
+**Alternate BFS**
+We can use a more-general approach for level-order traversal (one that doesn't depend on the binary tree invariant)
+
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        q = deque([root])
+        res = []
+        while q:
+            level = []
+            for _ in range(len(q)):
+                node = q.popleft()
+                level.append(node)
+                q.append(node.left)
+                q.append(node.right)
+            
+            if len(level) > 0:
+                res.append(level)
         return res
 
 ## 98. Validate Binary Search Tree
