@@ -132,10 +132,19 @@ Lastly, we want to merge the two lists by alternating them.
 
 Here we iterate while `second` exists, and for each iteration, we have `first` point to `second`, and then `second` point to `temp1`. There's nothing left to update temp2, so we simply just update the pointers to the next corresponding element.
 
+# 19. Remove Nth Node from Linked List
 
+You are given the beginning of a linked list `head` and an integer `n`. Remove the `nth` node form the **end** of the list, and return the list.
 
+### Key Takeaways
 
+The main difficulty of this problem is knowing how to get to node that is `nth` from the end of the list.
 
+To do this, we'll have a temporary pointer (`right`) (starting from head) that iterates forward `n` times. Then, we'll have a temporary pointer (`prev`) initialized as `prev = dummy`, where `dummy = ListNode(0, head)`, that essentially tracks the previous node from n.
 
+Then, we iterate while `right` exists while also iterating `prev`. Since right is shifted forward `n` times before this, by the time `right` == `None`, that means `prev` is the node right before the `nth` from the end.
 
+Thus, removing the node is as simple as doing `prev.next = prev.next.next`
+
+Lastly, we return `dummy.next`. We do this in case the node to be deleted is the first one. If this is the case, 
 
