@@ -1,6 +1,6 @@
 # Dynamic Programming
 
-## General Notes
+## Things of Note
 
 Generally, you find an optimal solution to a problem by breaking it down into smaller, overlapping subproblems and using previously-computed values to build up to a solution. 
 
@@ -18,7 +18,7 @@ You usually store the results in a 1-D array.
 
 3. Recurrence Relation
 
-    - defines how to compute the value of `dp[i]` using previously-computedstates.
+    - defines how to compute the value of `dp[i]` using previously-computed states.
 
 4. Base Case Initialization
 
@@ -26,7 +26,7 @@ You usually store the results in a 1-D array.
 
 5. Iterative Computation
 
-    - Can use the recurrence relation and base case to fill each value in `dp[]` from left t right (bottom-up).
+    - Can use the recurrence relation and base case to fill each value in `dp[]` from left to right (bottom-up).
 
 ## 70. Climbing Stairs
 
