@@ -1,6 +1,12 @@
 # Backtracking
 
-## 39. Combination Target Sum
+## Things of Note
+
+At least for these problems, "backtracking" results in some decision tree. One big clue is the runtime, which is something like `O(o^s)`, where o = number of options at each decision, and s = number of decisions.
+
+Since this is a decision **tree**, can traverse it using a dfs (recursion)
+
+# 39. Combination Target Sum
 
 You are given an array of **distinct** integers `nums` and a target integer `target`. Your task is to return a list of all **unique combinations** of `nums` where the chosen numbers sum to `target`.
 
@@ -52,3 +58,34 @@ Then for our solution, we just do
         # i = 0, curr = []
         dfs(0, [])
         return res
+
+
+**Runtime:**
+
+The time complexity for this problem is `O(2^t/m)` and the space complexity is `O(t/m)`. The space complexity is since curr can't be larger than `t/m`.
+
+The runtime is because we're traversing a binary decision tree, each step we have 2 options: include `nums[i]` or no longer include `nums[i]`. And since we know that the resulting arrays can be no larger than `t/m`, the runtime is `O(2^t/m)`.
+
+# 79. Word Search
+
+Given a 2-D grid of characters `board` and a string word, return `true` if the word is present in the grid, otherwise return `false`.
+
+For the word to be present it must be possible to form it with a path in the board with horizontally or vertically neighboring cells. The same cell may not be used more than once in a word.
+
+Runtime: `O(4^n)` time, `O(n)` space
+
+**Ex:** searching for "cat"
+
+![Alt text](https://imagedelivery.net/CLfkmk9Wzy8_9HRyug4EVA/7c1fcf82-71c8-4750-3ddd-4ab6a666a500/public)
+
+
+## Key Takeaways
+
+The giveaway here is that this is a very-inefficient runtime, so we're likely going to need to check many different possibilities, i.e. a decision tree. In this case, it makes sense that the runtime is O(4^n) because for each letter we are checking we are going to check the neighboring letter in each of the 4 directions. And to traverse this decision tree, we will use a recursive dfs approach.
+
+Recall that when writing a dfs, you specify
+
+1. the success and failure cases (when to return from the algorithm)
+2. any processing during that iteration
+3. the recursive call on new parameters that maintain the subproblem
+
