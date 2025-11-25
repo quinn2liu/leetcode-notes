@@ -21,4 +21,9 @@
 - wrap in `dict()` to convert back to dict if desired
     - `dict(sorted(yourDictionaryHere.items(), key = lambda item: item[1]))`
 
+### Equality of Dictionaries
+- You can easily check whether 2 dictionaries are equal by using the equals operator.
+    - `dict1 == dict2` -> returns a Bool
+
+
 
