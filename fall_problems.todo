@@ -2,10 +2,10 @@
 Easy:
     ☐ Contains Duplicate @started(25-11-13 10:27)
     ✔ Valid Anagram @started(25-11-13 10:27) @done(25-11-25 11:14) @lasted(1w5d47m50s)
-    ☐ Two Sum @started(25-11-13 10:27)
+    ✔ Two Sum @started(25-11-13 10:27) @done(25-12-01 16:34) @lasted(2w4d6h7m45s)
     ✔ Valid Palindrome @started(25-11-13 10:27) @done(25-11-29 17:44) @lasted(2w2d7h17m21s)
     ☐ Best Time to Buy and Sell Stock @started(25-11-13 10:27)
-    ☐ Valid Parentheses @started(25-11-13 10:27)
+    ✔ Valid Parentheses @started(25-11-13 10:27) @done(25-12-01 11:02) @lasted(2w4d35m12s)
     ✔ Reverse Linked List @started(25-11-13 10:27) @done(25-11-29 17:44) @lasted(2w2d7h17m4s)
     ☐ Merge Two Sorted Lists @started(25-11-13 10:27)
     ☐ Linked List Cycle @started(25-11-13 10:27)
@@ -14,7 +14,7 @@ Easy:
     ✔ Same Tree @started(25-11-13 10:27) @done(25-11-27 13:05) @lasted(2w2h38m44s)
     ☐ Subtree of Another Tree @started(25-11-13 10:27)
     ☐ Climbing Stairs @started(25-11-13 10:27)
-    ☐ Meeting Rooms
+    ✔ Meeting Rooms @done(25-12-01 12:58)
 
 Medium:
     ☐ Group Anagrams @started(25-11-13 10:27)
@@ -23,9 +23,9 @@ Medium:
     ☐ Product of Array Except Self @started(25-11-13 10:26)
     ☐ Longest Consecutive Sequence @started(25-11-13 10:26)
     ☐ Valid Palindrome @started(25-11-13 10:27)
-    ☐ 3Sum @started(25-11-13 10:27)
+    ✔ 3Sum @started(25-11-13 10:27) @done(25-12-01 16:34) @lasted(2w4d6h7m29s)
     ☐ Container with Most Water @started(25-11-13 10:27)
-    ☐ Longest Substring Without Repeating Characters @started(25-11-13 10:27)
+    ✔ Longest Substring Without Repeating Characters @started(25-11-13 10:27) @done(25-12-01 15:41) @lasted(2w4d5h14m33s)
     ✔ Longest Repeating Character Replacement @started(25-11-13 10:27) @done(25-11-27 13:48) @lasted(2w3h21m15s)
     ✔ Find Minimum in Rotated Sorted Array @started(25-11-13 10:28) @done(25-11-25 22:58) @lasted(1w5d12h30m19s)
     ☐ Search in Rotated Sorted Array @started(25-11-13 10:28)
@@ -62,7 +62,7 @@ Medium:
     ☐ Insert Interval
     ☐ Merge Intervals
     ☐ Non Overlapping Intervals
-    ☐ Meeting Rooms II
+    ✔ Meeting Rooms II @done(25-12-01 14:24)
         Math:
             ☐ Rotate Image
             ✔ Spiral Matrix @done(25-11-27 15:43)

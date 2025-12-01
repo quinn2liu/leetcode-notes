@@ -2,7 +2,11 @@
 
 **Things of note**
 
-observation: you move each pointer **programatically** based on some comparison. i.e. `if (condition 1)`, then move the left pointer. `if (condition 2)`, then move the right pointer.
+Intuition: you move each pointer **programatically** based on some comparison. i.e. `if (condition 1)`, then move the left pointer. `if (condition 2)`, then move the right pointer.
+
+- lends itself to be useful when data is sorted/can be sorted
+
+Can be used to find a pair or window that satisfies a condition
 
 ## 15. Three Sum
 
