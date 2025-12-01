@@ -13,22 +13,22 @@ Given the beginning of a singly linked list `head`, reverse the list, and return
 
 Iterative Solution:
 
-The key to reversing the order of the pointers is to have a `temp` node with which you use to switch the pointers. You also need a `curr` node to represent the next node in the original list, and a `prev` node to represent the head of the new, reversed list.
+The key to reversing the order of the pointers is to have a `temp` node with which you store the original, non-reversed part of the list. You also need a `curr` node to represent the current node you are reversing, and a `prev` node to represent the node that you are pointing the reversed pointer to.
 
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         prev, curr = None, head
 
         while curr:
-            temp = curr
-            curr = curr.next
-            temp.next = prev
-            prev = temp
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
 
         return prev
 
-Essentially, you update temp to be `curr` (the "head" of the original list). Then you immedietly update `curr` so that it moves to the next node of the original list. Then using `temp`, you have it now point to the `prev` node, which will be the `head` of your new list. To then make sure `prev` is updated, you assign `prev = temp`.
+Essentially, you initialize temp to be `curr.next` so that you store the next node of the original list. Then you update `curr.next` to point to `prev` (the reversal fo the list). Then, you get our variables ready for the next iteration: `prev = curr` since you want the next node to point to the reversed list, and `curr = temp` because you want to update the next "node to be reversed."
 
-This process is repeated until `curr == None`, in which case `prev` is the node that was originally the tail of the given list. Since these pointers have been reversed, you return prev.
+This process is repeated until `curr == None`, in which case `prev` is the node that represents the head of yoru new list.
 
 ## 21. Merge 2 Sorted Linked Lists
 
@@ -137,6 +137,11 @@ Here we iterate while `second` exists, and for each iteration, we have `first` p
 You are given the beginning of a linked list `head` and an integer `n`. Remove the `nth` node form the **end** of the list, and return the list.
 
 ### Key Takeaways
+
+**Brute force**
+
+- one pass to find the size of the array
+- another pass to remove the nth from the end   
 
 The main difficulty of this problem is knowing how to get to node that is `nth` from the end of the list.
 

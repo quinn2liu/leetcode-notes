@@ -130,3 +130,36 @@ Code:
             return nums[0]
 
         return max(self.helper(nums[1:]), self.helper(nums[:-1]))
+
+## 152. Maximum Product Subarray
+
+Given an integer array `nums`, find a **subarray** that has the largest product within the array and return it.
+
+A **subarray** is a contiguous non-empty sequence of elements within an array.
+
+### Key Takeaways
+
+The key difficulty of this problem is that the number in nums could be negative. So whenever you introduce a new number to your current max subarray, it could just invert the sign. You would think it is best then to get rid of this subarray product when it's negative, it could be multiplied by a later negative number to become positive again.
+
+But, let's imagine if the numbers were stricty positive (and maybe 0), then what would we do?
+- You would keep a global `result` and `currMax` variable. Current max is the product of the current max subarray. So while iterating through each `num` in `nums`, we do the following:
+
+        newMax = currMax * num
+        currMax = max(newMax, num)
+        result = max(result, currMax)
+
+    - the key point is knowing when to reset our subarray. In this case, we'd reset in case a num is 0, hence why `currMax = max(newMax, num)`, in case the `newMax` becomes 0
+
+So to handle the negative number case, we want to keep a running minimum value, `currMin` as well. This is so that if the next `num` is negative and `currMin` is negative, then the resulting product is our new `result`.
+
+So to support negative numbers, for each iteration of the for loop we do:
+
+    newMin, newMax = currMin * num, currMax * num
+
+    currMax = max(newMin, newMax, num)
+    currMin = min(newMin, newMax, num)
+
+    result = max(currMax, result)
+
+- ^^ note that we do the min/max of `newMin`, `newMax`, and `num` because `newMin` could be the new max after a negative is multiplied, `newMax` could the new min after a negative is multiplied, and `num` resets the subarray.
+

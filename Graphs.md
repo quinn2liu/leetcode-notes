@@ -2,6 +2,14 @@
 
 ## General Notes
 
+### Graph Representations
+
+*Adjacency List*
+
+*Node*
+
+*Edge List*
+
 ### DFS:
 
 When performing DFS, you should start by defining the actual DFS that you're going to call first before implementing. What this means is that you should think about what your initial DFS call will look like (what variables you need to pass through and what the initial case looks like).
@@ -268,4 +276,32 @@ To do this, we need to keep track of 2 things.
             
             return sum(inDegree) == 0
 
+## 323. Number of Connected Components in an Undirected Graph
 
+There is an undirected graph with `n` nodes. There is also an `edges` array, where `edges[i] = [a, b]` means that there is an edge between node `a` and node `b` in the graph.
+
+The nodes are numbered from `0` to `n - 1`.
+
+Return the total number of connected components in that graph.
+
+### Key Takeaways
+
+So the main mistake I made when thinking about this problem was not recognizing that you can still use graph traversal algorithms to explore an entire graph, even if the graph isn't fully connected.
+
+In this problem, either using dfs or bfs, you can iteratively traverse the graph with the use of a visited array and an adjacency list. The adjacency list as a data structure lends itself to a bfs-style traversal.
+
+- **adjacency list:** a list of lists, where the index represents the node, and the list at that index is a list of neighbors to that node.
+
+So, all we have to do is define a bfs helper function that explores a given node's connected component. Then we iterate through the nodes and whenever we come across one that hasn't been visited, we call this helper and add 1 to our connected component count.
+
+    visited = [False] * n
+    def bfs(node):
+        q = deque([node])
+        while q:
+            curr = q.popleft()
+            if not visited[curr]:
+                visited[curr] = True
+                for neighbor in adj[curr]:
+                    q.append(neighbor)
+                    visited[neighbor] = True
+    

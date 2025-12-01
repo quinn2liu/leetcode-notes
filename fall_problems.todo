@@ -3,15 +3,15 @@ Easy:
     ☐ Contains Duplicate @started(25-11-13 10:27)
     ✔ Valid Anagram @started(25-11-13 10:27) @done(25-11-25 11:14) @lasted(1w5d47m50s)
     ☐ Two Sum @started(25-11-13 10:27)
-    ☐ Valid Palindrome @started(25-11-13 10:27)
+    ✔ Valid Palindrome @started(25-11-13 10:27) @done(25-11-29 17:44) @lasted(2w2d7h17m21s)
     ☐ Best Time to Buy and Sell Stock @started(25-11-13 10:27)
     ☐ Valid Parentheses @started(25-11-13 10:27)
-    ☐ Reverse Linked List @started(25-11-13 10:27)
+    ✔ Reverse Linked List @started(25-11-13 10:27) @done(25-11-29 17:44) @lasted(2w2d7h17m4s)
     ☐ Merge Two Sorted Lists @started(25-11-13 10:27)
     ☐ Linked List Cycle @started(25-11-13 10:27)
-    ☐ Invert Binary Tree @started(25-11-13 10:27)
+    ✔ Invert Binary Tree @started(25-11-13 10:27) @done(25-11-28 15:30) @lasted(2w1d5h3m53s)
     ☐ Maximum Depth of Binary Tree @started(25-11-13 10:27)
-    ☐ Same Tree @started(25-11-13 10:27)
+    ✔ Same Tree @started(25-11-13 10:27) @done(25-11-27 13:05) @lasted(2w2h38m44s)
     ☐ Subtree of Another Tree @started(25-11-13 10:27)
     ☐ Climbing Stairs @started(25-11-13 10:27)
     ☐ Meeting Rooms
@@ -26,16 +26,16 @@ Medium:
     ☐ 3Sum @started(25-11-13 10:27)
     ☐ Container with Most Water @started(25-11-13 10:27)
     ☐ Longest Substring Without Repeating Characters @started(25-11-13 10:27)
-    ☐ Longest Repeating Character Replacement @started(25-11-13 10:27)
-    ☐ Find Minimum in Rotated Sorted Array @started(25-11-13 10:28)
+    ✔ Longest Repeating Character Replacement @started(25-11-13 10:27) @done(25-11-27 13:48) @lasted(2w3h21m15s)
+    ✔ Find Minimum in Rotated Sorted Array @started(25-11-13 10:28) @done(25-11-25 22:58) @lasted(1w5d12h30m19s)
     ☐ Search in Rotated Sorted Array @started(25-11-13 10:28)
     ☐ Reorder List @started(25-11-13 10:28)
-    ☐ Remove Nth Node From End of List @started(25-11-13 10:28)
+    ✔ Remove Nth Node From End of List @started(25-11-13 10:28) @done(25-11-27 16:12) @lasted(2w5h44m5s)
     ☐ Lowerst Common Ancestor of a Binary Search Tree @started(25-11-13 10:28)
     ☐ Binary Tree Level Order Traversal @started(25-11-13 10:28)
     ☐ Validate Binary Search Tree @started(25-11-13 10:28)
     ☐ Kth Smallest Element in a BST @started(25-11-13 10:28)
-    ☐ Construct Binary Tree from Preorder and Inorder Traversal
+    ✔ Construct Binary Tree from Preorder and Inorder Traversal @done(25-11-28 17:44)
     ☐ Combination Sum @started(25-11-13 10:28)
     ☐ Word Search @started(25-11-13 10:28)
     ☐ Implement Trie (Prefix Tree)
@@ -44,13 +44,15 @@ Medium:
     ☐ Clone Graph
     ☐ Pacific Atlantic Water Flow
     ☐ Course Schedule
+    ☐ Graph Valid Tree
+    ☐ Number of Connected Components in an Undirected Graph
     ☐ House Robber @started(25-11-13 10:28)
-    ☐ House Robber II @started(25-11-13 10:28)
+    ✔ House Robber II @started(25-11-13 10:28) @done(25-11-28 15:34) @lasted(2w1d5h6m38s)
     ☐ Longest Palindromic Substring
     ☐ Palindromic Substrings
     ☐ Decode Ways
     ☐ Coin Change
-    ☐ Maximum Product Subarray
+    ✔ Maximum Product Subarray @done(25-11-30 16:10)
     ☐ Word Break
     ☐ Longest Increasing Subsequence
     ☐ Unique Paths
@@ -63,9 +65,8 @@ Medium:
     ☐ Meeting Rooms II
         Math:
             ☐ Rotate Image
-            ☐ Spiral Matrix
+            ✔ Spiral Matrix @done(25-11-27 15:43)
             ☐ Set Matrix Zeroes
-
 
 Hard:
     ☐ Minimum Window Substring @started(25-11-13 10:29)

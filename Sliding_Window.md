@@ -40,7 +40,7 @@ After performing at most `k` replacements, return the length of the longest subs
 
 In this problem, the condition we need to preserve for a valid sliding window is that "the number of characters we need to replace must be `<= k`"
 
-To figure this out, we have a dictionary representing the number of each character currently present in the substring. Then to get the number of characters we need to replace, we do "size of window - count of most-frequent letter", or `(r - l + 1) - max(count.values)`.
+To figure this out, we have a dictionary representing the number of each character currently present in the substring. Then to get the number of characters we need to replace, we do "size of window - count of most-frequent letter", or `(r - l + 1) - max(count.values())`.
 
 While this quantity is `> k`, the left pointer is moved until we have met this condition. Only after this we will update our result to be `max(res, (r - l + 1))`.
 

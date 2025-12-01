@@ -11,8 +11,24 @@ There are several ways to traverse a tree.
 **Implement BFS using a queue, DFS using recursion.**
 
 **BFS Template**
+        
+    def bfs(head):
+        q = deque([head])
+        while q:
+            node = q.popleft()
+            # in a binary tree this would just be left and right
+            for child in node.children:
+                q.append(child)
 
 **DFS Template**
+
+    def dfs(node):
+        if node is None:
+            return
+        for child in node.children:
+            dfs(child)
+
+^^ note that this dfs is obviously highly-simplified because there's no processing going on.
 
 ### Binary Search Tree
 
@@ -102,7 +118,7 @@ After we've popped `i` nodes, we'll increment a `level` variable, to indicate th
             level += 1
         return level
 
-## 100. Same Tree
+# 100. Same Tree
 
 Given the roots of two binary trees `p` and `q`, return `true` if the trees are equivalent, otherwise return `false`.
 
@@ -367,5 +383,89 @@ To check the left subtree, we call `dfs(node.left, leftBound, node.val)`. The ri
 
 We only update one of the bounds becuase if we're checking the right subtree, the lower bound for the node we are checking is now updated to the previous-node's value, and vice versa.
 
+## 230. Kth Smallest Integer in BST
 
+Given the `root` of a binary search tree, and an integer `k`, return the `k`th smallest value (1-indexed) of all the values of the nodes in the tree.
 
+A **binary search tree** satisfies the following constraints:
+
+- The left subtree of every node contains only nodes with keys less than the node's key.
+- The right subtree of every node contains only nodes with keys greater than the node's key.
+- Both the left and right subtrees are also binary search trees.
+
+### Key Takeaways
+
+The main thing to note here are the BST constaints. Since we know every node in the left subtree contains nodes that are less than it and vice versa for the right, we can pick up on doing an inorder traversal of the tree. This is implemented using a variation of recursive dfs.
+
+    def kthSmallest(root, k):
+        tree_arr = []
+
+        def dfs(node):
+            if node is None:
+                return
+            
+            dfs(node.left)
+            tree_arr.append(node.val)
+            dfs(node.right)
+
+        # k - 1 because k is 1-indexed
+        return tree_arr[k-1]
+
+## 105. Construct Binary Tree from Inorder and Preorder Traversal
+
+Given two integer arrays `preorder` and `inorder` where `preorder` is the preorder traversal of a binary tree and `inorder` is the inorder traversal of the same tree, construct and return the binary tree.
+
+### Key Takeaways.
+
+First thing's first, the main takeaway is what inorder and preorder traversal are. You can refer to the image at the top of the notes, but in words ->
+
+*note: "visit" means we process the node, and "traverse" means we expore until None
+
+- *Inorder:* traverse the left subtree, then visit the current node, then traverse the right subtree.
+    - helps to think about as a recursive dfs (explore left until none, then process that node. then process the parent, then that parent's right, and then pop back up another level, etc)
+    - in a binary search tree (where all items in the left subtree are less than the root and vice versa for the right), this traversal yields a sorted order
+
+- *Preorder:* process current node, traverse left subtree, traverse right subtree. (aka, process the node before the children)
+
+There are 2 main observations from this problem. First, that the first element of `preorder` is the root of the tree. Second, `inorder` can be split in half to represent nodes in the left subtree and the right subtree.
+
+- So if we want to reconstruct the tree, we should do it in the order of `preorder`, as it goes top down (process parent and then children). Then, we can use `inorder` to determine the structure of the tree.
+
+The way we can deduce the structure of the tree is for each recursive dfs call to take in a `left` and `right` pointer. These signify the region of `inorder` that this recursive call is constructing (since we can split `inorder` into subtrees).
+- once `right` < `left`, that means that there is no more nodes in the subtree, so we've reached the end of a leaf
+
+**Algorithm**
+
+We will be reconstructing the tree in in a preorder order.
+
+So at each step / recursive call, we start by processing the root of our current subtree, which is deduced from a global `self.preIndex` variable from `preorder`. 
+
+Then `self.preIndex` is incremented because we want to know the next node to process in `preorder`. 
+
+We the initialize a node from this value and get the index of this root in `inorder`. This `rootIndex` is then used to split `inorder`so that we can perform a recursive call to create the left and right subtrees.
+- `node.left = dfs(left, rootIndex - 1)` and `node.right = dfs(rootIndex + 1, right)`.
+
+As our base case, we've reached a leaf node when `right < left`, since that means that the subtree we are trying to create is no longer valid. So we can return `None` and begin propogating back up the call stack.
+
+After initializing `node.left` and `node.right`, we can then return the root since the subtrees will have been constructred.
+
+    class Solution:
+    
+        def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+            indices = {value: index for index, value in enumerate(inorder)}
+
+            self.preIndex = 0
+            def dfs(l, r):
+                if r < l:
+                    return None
+                rootVal = preorder[self.preIndex]
+                rootIndex = indices[rootVal]
+                self.preIndex += 1
+
+                root = TreeNode(rootVal)
+                root.left = dfs(l, rootIndex - 1)
+                root.right = dfs(rootIndex + 1, r)
+
+                return root
+
+            return dfs(0, len(inorder) - 1)

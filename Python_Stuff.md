@@ -21,9 +21,19 @@
 - wrap in `dict()` to convert back to dict if desired
     - `dict(sorted(yourDictionaryHere.items(), key = lambda item: item[1]))`
 
+### Dictionary from Array
+initialize a `dict` of key's and values from an array, where the keys are indexes and values are values
+
+- `dict = {val: idx from idx, val in enumerate(your_array)}`
+
+
 ### Equality of Dictionaries
 - You can easily check whether 2 dictionaries are equal by using the equals operator.
     - `dict1 == dict2` -> returns a Bool
 
+### Max Value of Dictionary Values (and maybe keys?)
 
+- You can get the max value of all dictionary values like this:
+    - `maxValue = max(dict.values())`
+    - can also do `min()`, and also for `dict.keys()` 
 
