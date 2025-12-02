@@ -43,3 +43,27 @@ Once again, we have two pointers and for each pass, we programatically update on
 In this problem, the condition use to update the pointers is based on the smaller of the two bars. This is because our amount is "bottlenecked" by the smaller of the two bars. So in theory by moving this bar, we are hoping to find another bar that will no longer be the "bottleneck". 
 
 This guarantees that we will eventually calculate the largest bucket amount. This is because we start with the largest amount with which we have tested (0). The only way we get a larger amount while testing all possibilities is if we change the smaller of the two bars in hopes of getting a larger amount. 
+
+## 26. Remove Duplicates from Sorted Array
+
+Given an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
+
+Consider the number of unique elements in `nums` to be `k​​​​​​​​​​​​​​`. After removing duplicates, return the number of unique elements k.
+
+The first `k` elements of `nums` should contain the unique numbers in sorted order. The remaining elements beyond index `k - 1` can be ignored.
+
+### Key Takeaways
+
+Okay so... I had the right idea but I guess you can't copy? But the main solution is that you basically have an `l` pointer for iterating `0 - k` in `nums` and then another `r` pointer to interate through all of `nums`. When the `r` pointer gets to a num that's different from `nums[l]`, then we increment `l` and then update the value.
+
+    def removeDuplicates(nums):
+        l, r, count = 0, 0, 0
+
+        while r < len(nums):
+            nums[l] = nums[r]
+            count += 1
+            while r < len(nums) and nums[r] == nums[l]:
+                r += 1
+            l += 1
+        
+        return count
