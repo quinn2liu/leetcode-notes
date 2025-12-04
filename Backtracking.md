@@ -59,6 +59,7 @@ Then for our solution, we just do
         dfs(0, [])
         return res
 
+**NOTE:** You need to do `curr.pop()` after exiting the branch with which curr is getting a new num. This is because curr is shared by all recursive calls, so if we only do `curr.append()` upon entry of the recursive level and not `curr.pop()` upon exit, higher levels of the tree are going to view an expanded `curr`. 
 
 **Runtime:**
 
