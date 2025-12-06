@@ -116,3 +116,24 @@ Each call of helper represents the current encoding layer we're on. So k and res
 - When `c == ]`, then we pop up a layer by returning the current result
 - and then similar logic to the previous case for the other 2 cases
 
+## 155. Min Stack
+
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+Implement the `MinStack` class:
+
+- `MinStack()` initializes the stack object.
+- void `push(int val)` pushes the element `val` onto the stack.
+- void `pop()` removes the element on the top of the stack.
+- int `top()` gets the top element of the stack.
+- int `getMin()` retrieves the minimum element in the stack.
+
+You must implement a solution with `O(1)` time complexity for each function.
+
+### Key Takeaways
+My main difficulty with this problem was not properly understanding it when reading, but it's actually pretty simple.
+
+You have 2 stacks, one that tracks the minimum at that "level" of the stack, and another being the stack itself. Whenever you append to the stack, you'll check whether this new value is smaller than the previous min. If it is then add it to the minStack and if not add the same minimum.
+
+Then whenever you pop, you also pop the min to maintain the invariant.
+

@@ -167,3 +167,42 @@ In english, whenever we find the start of a sequence, we keep checking for the n
                 longest = max(longest, length)
 
         return longest
+
+## 560. Subarray Sum Equals K
+
+Given an array of integers `nums` and an integer `k`, return the total number of subarrays whose sum equals to `k`.
+
+A subarray is a contiguous non-empty sequence of elements within an array.
+
+### Key Takeaways
+
+The main difficulty of this problem is that the entries in `nums` can be negative. If they were strictly positive, we could do an iterative approach, where we add the next number to a running total, check if it's >= `k`, then handle it as so and reset the total.
+
+The problem with using this solution with negative numbers is that it assumes the subarray total is constantly increasing, when in fact it may decrease and then increase again, resulting in a different subarray.
+
+We want to similarly iterate through `nums`, but whenever we add a new `num`, I find it helpful to think about it as so:
+- "Now that we've iterated to `num`, what (if any) are all the possible subarrays from this `num` to the start of `nums` that sum up to `k`?"
+
+This is where the crux of the problem comes, you can observe that for any subarray, `sum(nums[i:j]) = sum(nums[0:j]) - sum(nums[0:i])`. So since we're basically incrementing `j` with each iteration of `num` in `nums`, we can check if at that point, there are any "prefix" sum arrays that have a value ` = sum(nums[0:j]) - k`.
+- this is beacuse we're trying to get the equation `k = sum(nums[i:j]) = sum(nums[0:j]) - sum(nums[0:i])`
+- so solving for k, this gives us `sum(nums[0:i]) = sum(nums[0:j]) - k`
+
+So to know whether we have any prefix sums = `sum(nums[0:j]) - k`, we can maintain a hashmap where the keys are prefix array sums, and the value is the number of arrays that have this sum. We need a hash map because negative numbers means that a prefix sum could be a result of multiple different prefix arrays.
+
+Putting this all together, we get something like this:
+
+    def solution(nums, k):
+        prefixSum = {0:1}
+        currSum = 0
+        res = 0
+
+        for num in nums:
+            currSum += num
+            diff = currSum - k
+            if prefixSum.get(diff):
+                res += prefixSum[diff]
+            prefixSum[currSum] = prefixSum.get(currSum, 0) + 1
+        
+        return res
+
+- Note ^^ you need to initialize `prefixSum = {0:1}` with that base case in case a subarray (currSum) sums up to `k` without needing to chop off a subarray.

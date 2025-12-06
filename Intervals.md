@@ -30,7 +30,7 @@ The hardest part of this problem is how to track whether to add allocate a new r
 
 While this is great, you need an efficient way to always get the soonest-ending meeting at the time which you are scheduling the curren tmeeting.
 
-This is there a **min heap** comes in handy. We can represent the rooms with which meetings can be allocated by using a min heap containing the end times of meetings.
+This is where a **min heap** comes in handy. We can represent the rooms with which meetings can be allocated by using a min heap containing the end times of meetings.
 
 So, the algorithm process each meeting at a time and pushes it to the min heap. The only check is whether we need to pop the earliest-ending meeting (in this case, that meeting will have concluded by the time we are scheduling this one, so we can remove it).
 
