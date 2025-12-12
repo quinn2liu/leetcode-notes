@@ -8,6 +8,26 @@ Intuition: you move each pointer **programatically** based on some comparison. i
 
 Can be used to find a pair or window that satisfies a condition
 
+## 167. Two Sum II
+
+Given an array of integers `numbers` that is sorted in non-decreasing order.
+
+Return the indices (1-indexed) of two numbers, `[index1, index2]`, such that they add up to a given target number target and `index1 < index2`. Note that `index1` and `index2` cannot be equal, therefore you may not use the same element twice.
+
+There will always be exactly one valid solution.
+
+Your solution must use `O(1)` additional space.
+
+### Key Takeaways
+
+A "smart" way to do this could be to iterate through numbers and binary search for the diff (target - numbers[i]) in the rest of the array. 
+
+If you want to get a more-efficient (`O(n)`) solution, then you can leverage two-pointers. The actual reasoning isn't complicated but I feel like it uses the exact principles that explain what two pointers is.
+
+You have `l` and `r` which are initialized to `0` and `len(numbers) - 1`. While `l < r`, you check whether `numbers[l] + numbers[r]` is <, >, or = to the target. Since our array is sorted, if this sum is larger, then we know we must replace one of our numbers with a smaller number, which we can get by `r -= 1`. In the opposite case, we can do `l += 1` to increase this sum.
+
+The idea is that the two pointers move closer based on some conditional check. These pointers either maintain some window / section of the data struct (in this case an array) or literally keeps tracks of two pointers.
+
 ## 15. Three Sum
 
 Given an integer array nums, return all the triplets `[nums[i], nums[j], nums[k]]` where `nums[i] + nums[j] + nums[k] == 0`, and the indices `i`, `j` and `k` are all distinct.

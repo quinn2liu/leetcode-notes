@@ -86,13 +86,13 @@ There are 3 ways to solve this problem.
 Here, I simply use the power of recursion to essentially traverse branches of the tree until I reach the leaf nodes. Once you reach the end of a leaf node, you return 0 (as `None` shouldn't add to your depth). Then when you return from recursion, you add 1 to whatever return value you have to accurately get the depth.
 
 Lastly, to ensure that you have the max depth, each time you get the depth from the right and left sides of the tree, you should only return the `max()` of the two sides. Here it is in code:
+```python
+def maxDepth(self, root: Optional[TreeNode]) -> int:
+    if not root:
+        return 0
 
-    def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
-
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
-
+    return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+```
 
 #### 2. BFS
 
@@ -100,25 +100,73 @@ With BFS, we have a deque representing the nodes that we have to explore (initia
 
 After we've popped `i` nodes, we'll increment a `level` variable, to indicate that we've explored all nodes for that level.
 
-    def maxDepth(self, root: Optional[TreeNode]) -> int:
-        q = deque()
-        if root:
-            q.append(root)
+```python
+def maxDepth(self, root: Optional[TreeNode]) -> int:
+    q = deque()
+    if root:
+        q.append(root)
 
-        level = 0
+    level = 0
 
-        while q:
+    while q:
 
-            for i in range(len(q)):
-                node = q.popleft()
-                if node.left:
-                    q.append(node.left)
-                if node.right:
-                    q.append(node.right)
-            level += 1
-        return level
+        for i in range(len(q)):
+            node = q.popleft()
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+        level += 1
+    return level
+```
 
-# 100. Same Tree
+## Diameter of Binary Tree
+
+Given the `root` of a binary tree, return the **length** of the diameter of the tree.
+
+The **diameter** of a binary tree is the **length** of the longest path between any two nodes in a tree. This path may or may not pass through the `root`.
+
+The **length** of a path between two nodes is represented by the number of edges between them.
+
+### Key Takeaways
+
+In other words, the `diameter` is really the longest path in the tree.
+
+Since this is a binary tree and not a standard graph, the longest path can either be from one leaf to another leaf (where they meet at a parent node) or from the root to a leaf. The first case is the more interesting, because the first is more of an edge case (where the root only has one child).
+
+If we want to get the **longest path** that passes through a single parent node, at each node we get the max height of its left and right subtrees. From there, we calculate the length of the path using `currPath = height(left) + height(right) + 1`, since we're adding this current node to the path. Then, we determine whether this path is the longest path *in the graph*: `maxPath = max(maxPath, currPath)`.
+
+It makes the most sense to traverse the graph in post-order traversal (process the children first) using dfs. This is because we need to explore the entire left and right subtrees of a node first to then get the max path of that node to one of it's leaves.
+
+Algorithm looks like this:
+
+```python
+def diameterBinaryTree(self, root: Optional[TreeNode]) -> int:
+
+    self.maxPathNodes = 1
+
+    def dfs(node):
+        if not node:
+            return 0
+
+        leftHeight = dfs(node.left)
+        rightHeight = dfs(node.right)
+        currPathNodes = leftHeight + rightHeight + 1
+        self.maxPathNodes = max(self.maxPathNodes, currPathNodes)
+        return 1 + max(leftHeight, rightHeight)
+
+    dfs(root)
+    return maxPathNodes - 1
+
+```
+
+^^ **Note**
+- `currPathNodes = leftHeight + rightHeight + 1` because while we have the height of the left and right subtrees, we add 1 to include this parent node and "connect" them, giving us a path. 
+- we return maxPathNodes - 1 because we're tracking the # of nodes in the path, but the length of a path = nodes - 1
+
+You can rewrite it to just track the # of edges, but to me it makes more sense to think of in nodes.
+
+## 100. Same Tree
 
 Given the roots of two binary trees `p` and `q`, return `true` if the trees are equivalent, otherwise return `false`.
 
