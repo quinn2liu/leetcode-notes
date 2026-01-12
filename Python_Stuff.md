@@ -11,6 +11,10 @@
     - y	-> Optional. A string with the same length as parameter x. Each character in the first parameter will be replaced with the corresponding character in this string.
     - z	-> Optional. A string describing which characters to remove from the original string.
 
+### Getting unicode integer of a character
+- given a `char`, call `ord(char)` to get its unicode
+- if you want the numbers relative to the alphabet, do `charInt = ord(char) - ord('a')`
+
 ## Dictionary
 
 ### Sort Dictionary by Values

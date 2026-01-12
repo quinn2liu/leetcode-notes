@@ -206,3 +206,19 @@ Putting this all together, we get something like this:
         return res
 
 - Note ^^ you need to initialize `prefixSum = {0:1}` with that base case in case a subarray (currSum) sums up to `k` without needing to chop off a subarray.
+
+## 242: Valid Anagram
+
+Given two strings `s` and `t`, return `true` if the two strings are anagrams of each other, otherwise return `false`.
+
+An anagram is a string that contains the exact same characters as another string, but the order of the characters can be different.
+
+### Key Takeaways
+
+The main difficulty of this problem is that you are constrained by O(n + m) time (length of the strings) and O(1) space, so you can't make data structures that are O(n) or O(m).
+
+Since we really only care about the frequency of each of the characters in the strings, we need some mapping between characters and count. A hashmap doesn't work though because we don't know how many key-value pairs there will be (even though in theory it's bounded by the alphabet).
+
+So in this case, we can create an O(1) hash table by making arrays of size 26 (alphabet), where the indicies correspond to a letter of the alphabet and the values are its frequency in the word.
+
+Use `ord(char) - ord('a')` to get the letter's unicode relative to 0.

@@ -1,11 +1,11 @@
 Winter/Spring 2026:
     Easy:
         Arrays:
-            ☐ Contains Duplicate
-            ☐ Valid Anagram
-            ☐ Two Sum
+            ✔ Contains Duplicate @done(26-01-11 15:23)
+            ✔ Valid Anagram @done(26-01-11 15:41)
+            ✔ Two Sum @done(26-01-11 16:10)
         Two Pointers:
-            ☐ Valid Palindrome
+            ✔ Valid Palindrome @done(26-01-11 16:23)
         Sliding Window:
             ☐ Best Time to Buy and Sell Stock
         Valid Parenthesis:
