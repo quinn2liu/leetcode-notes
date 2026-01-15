@@ -7,13 +7,13 @@ Winter/Spring 2026:
         Two Pointers:
             ✔ Valid Palindrome @done(26-01-11 16:23)
         Sliding Window:
-            ☐ Best Time to Buy and Sell Stock
+            ✔ Best Time to Buy and Sell Stock @done(26-01-12 20:04)
         Valid Parenthesis:
             ☐ Valid Parentheses
         Binary Serach:
             ☐ Binary Search
         Linked List:
-            ☐ Reverse Linked List
+            ✔ Reverse Linked List @done(26-01-12 21:24)
             ☐ Merge Two Sorted Lists
             ☐ Linked List Cycle
         Trees:
@@ -21,19 +21,19 @@ Winter/Spring 2026:
             ☐ Maximum Depth of Binary Tree
             ☐ Diameter of Binary Tree
             ☐ Balanced Binary Tree
-            ☐ Same Tree
-            ☐ Subtree of Another Tree
+            ✔ Same Tree @done(26-01-12 20:48)
+            ✔ Subtree of Another Tree @done(26-01-14 22:37)
         Heap / Priority Queue:
             ☐ Kth largest element in a Stream
             ☐ Last Stone Weight
         1-D Dynamic Programming:
             ☐ Climbing Stairs
-            ☐ Min Cost Climbing Stairs
+            ✔ Min Cost Climbing Stairs @done(26-01-12 22:04)
         Intervals:
-            ☐ Meeting Rooms
+            ✔ Meeting Rooms @done(26-01-14 21:20)
         Math & Geometry:
             ☐ Happy Number
-            ☐ Plus One
+            ✔ Plus One @done(26-01-14 21:36)
         Bit Manipulation:
             ☐ Single Number
             ☐ Number of 1 Bits

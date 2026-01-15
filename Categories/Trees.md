@@ -240,7 +240,7 @@ def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         return True
     
     # these nodes are equivalent, so we recurse the subtrees
-    if (p and q) and (p.val == q.vall):
+    if (p and q) and (p.val == q.val):
         return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
 
     # p and q are not equivalent nodes, so not same tree
