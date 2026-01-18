@@ -8,8 +8,8 @@ Winter/Spring 2026:
             ✔ Valid Palindrome @done(26-01-11 16:23)
         Sliding Window:
             ✔ Best Time to Buy and Sell Stock @done(26-01-12 20:04)
-        Valid Parenthesis:
-            ☐ Valid Parentheses
+        Stack:
+            ✔ Valid Parentheses @done(26-01-17 15:06)
         Binary Serach:
             ☐ Binary Search
         Linked List:
@@ -17,17 +17,17 @@ Winter/Spring 2026:
             ☐ Merge Two Sorted Lists
             ☐ Linked List Cycle
         Trees:
-            ☐ Invert Binary Tree
-            ☐ Maximum Depth of Binary Tree
-            ☐ Diameter of Binary Tree
-            ☐ Balanced Binary Tree
+            ✔ Invert Binary Tree @done(26-01-17 22:38)
+            ✔ Maximum Depth of Binary Tree @done(26-01-17 16:42)
+            ✔ Diameter of Binary Tree @done(26-01-17 22:31)
+            ✔ Balanced Binary Tree @done(26-01-17 23:24)
             ✔ Same Tree @done(26-01-12 20:48)
             ✔ Subtree of Another Tree @done(26-01-14 22:37)
         Heap / Priority Queue:
             ☐ Kth largest element in a Stream
             ☐ Last Stone Weight
         1-D Dynamic Programming:
-            ☐ Climbing Stairs
+            ✔ Climbing Stairs @done(26-01-17 15:20)
             ✔ Min Cost Climbing Stairs @done(26-01-12 22:04)
         Intervals:
             ✔ Meeting Rooms @done(26-01-14 21:20)

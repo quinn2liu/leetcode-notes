@@ -120,7 +120,7 @@ def maxDepth(self, root: Optional[TreeNode]) -> int:
     return level
 ```
 
-## Diameter of Binary Tree
+## 543. Diameter of Binary Tree
 
 Given the `root` of a binary tree, return the **length** of the diameter of the tree.
 
@@ -165,6 +165,35 @@ def diameterBinaryTree(self, root: Optional[TreeNode]) -> int:
 - we return maxPathNodes - 1 because we're tracking the # of nodes in the path, but the length of a path = nodes - 1
 
 You can rewrite it to just track the # of edges, but to me it makes more sense to think of in nodes.
+
+## 110. Balanced Binary Tree
+
+Given a binary tree, return `true` if it is height-balanced and `false` otherwise.
+
+A height-balanced binary tree is defined as a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+
+### Key Takeaways
+
+At least to me, the most-logical way to traverse this is recursively, specifically dfs with post-order traversal. So at each node, we first find the height of the subtrees, determine whether the tree at that level is balanced, and then return the height and whether it's balanced. 
+
+The main part that I got caught up on was that you need to somehow propogate whether the tree is balanced along with the height. If you do separate dfs traversals for each, you're going to repeat work and end up with `O(n^2)` runtime. So what I originally did was use dfs to calculate the height of the subtree / check balance, and then encode whether it's balanced into the return value (return -1 instead of the height of the tree).
+
+However, a better way is to just return a tuple/array where one element is whether the subtree is balanced, and the other element is the height of said subtree. The code ends up being something like this:
+
+```python
+def isBalanced(self, root: Optional[TreeNode]) -> bool:
+    
+    def dfs(node):
+        if not node:
+            return [True, 0]
+
+        left, right = dfs(node.left), dfs(node.right)
+        balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+        return [balanced, max(left[1], right[1]) + 1]
+
+    return dfs(root)[0]
+```
+
 
 ## 100. Same Tree
 
