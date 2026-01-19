@@ -11,11 +11,11 @@ Winter/Spring 2026:
         Stack:
             ✔ Valid Parentheses @done(26-01-17 15:06)
         Binary Serach:
-            ☐ Binary Search
+            ✔ Binary Search @done(26-01-18 15:37)
         Linked List:
             ✔ Reverse Linked List @done(26-01-12 21:24)
-            ☐ Merge Two Sorted Lists
-            ☐ Linked List Cycle
+            ✔ Merge Two Sorted Lists @done(26-01-18 14:34)
+            ✔ Linked List Cycle @done(26-01-18 15:12)
         Trees:
             ✔ Invert Binary Tree @done(26-01-17 22:38)
             ✔ Maximum Depth of Binary Tree @done(26-01-17 16:42)
@@ -24,15 +24,15 @@ Winter/Spring 2026:
             ✔ Same Tree @done(26-01-12 20:48)
             ✔ Subtree of Another Tree @done(26-01-14 22:37)
         Heap / Priority Queue:
-            ☐ Kth largest element in a Stream
-            ☐ Last Stone Weight
+            ✔ Kth largest element in a Stream @done(26-01-18 15:52)
+            ✔ Last Stone Weight @done(26-01-18 21:01)
         1-D Dynamic Programming:
             ✔ Climbing Stairs @done(26-01-17 15:20)
             ✔ Min Cost Climbing Stairs @done(26-01-12 22:04)
         Intervals:
             ✔ Meeting Rooms @done(26-01-14 21:20)
         Math & Geometry:
-            ☐ Happy Number
+            ✔ Happy Number @done(26-01-18 22:08)
             ✔ Plus One @done(26-01-14 21:36)
         Bit Manipulation:
             ☐ Single Number

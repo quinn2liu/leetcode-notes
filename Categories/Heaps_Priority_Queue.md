@@ -1,4 +1,4 @@
-# Heaps
+# Heaps / Priority Queue
 
 **Things to know**
 
@@ -7,6 +7,8 @@ can use `[ ]` as both a min and max heap via the **heapq** library
 - if you want to optimize a max heap (largest element on top), you can `heappush(heap, -1 * num)`, so that the largest element is the top.
 - pop using `heappop(heap)`
 - pushing and popping from a heap are both O(log n) operations
+
+I've noticed that problems use a heap when they need to maintain a sorted order of a changing list. Or in other words, if you have a list of elements that is changing, and you always need to know the largest/smallest of them, a heap is a great choice **to avoid sorting each time.**
 
 ## 295. Find Median from Data Stream
 

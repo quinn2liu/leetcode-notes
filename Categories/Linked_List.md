@@ -30,7 +30,7 @@ Essentially, you initialize temp to be `curr.next` so that you store the next no
 
 This process is repeated until `curr == None`, in which case `prev` is the node that represents the head of yoru new list.
 
-## 21. Merge 2 Sorted Linked Lists
+## 21. Merge Two Sorted Linked Lists
 
 You are given the heads of two sorted linked lists `list1` and `list2`.
 
@@ -82,6 +82,36 @@ Code:
         tail.next = list1 or list2
 
         return dummy.next
+
+## 141. Linked List Cycle Detection
+
+Given the beginning of a linked list `head`, return `true` if there is a cycle in the linked list. Otherwise, return `false`.
+
+There is a cycle in a linked list if at least one node in the list can be visited again by following the next pointer.
+
+### Key Takeaways
+
+So this is relatievly trivial if you want to use `O(n)` space, since you can just make a HashSet of visited nodes. In our case, the ListNode implementation doesn't have an `__eq__()` override, so it goes by the memory address (pointer) of the node, and thus we can add it to a set.
+
+If we want an O(1) space solution, then we need to get a bit creative. The algorithm for this is tortoise and hare pointers (fast and slow pointers). The slow pointer moves by 1 while the fast pointer moves by 2. If there's no cycle, then the fast pointer will reach None. If there is a cycle, however, then the fast pointer will eventually catch up to the slow pointer, and when that happens we can deduce that there is a cycle.
+
+The logic doesn't initially make sense, but if there is a cycle, then both the slow and fast pointers will eventually "enter" the cycle. At this point, there's a gap of spaces between fast and slow. At each iteration, slow will increase that gap by 1, and then fast decreases that gap by 2 (for a net of -1). So eventually, that gap will reduce to 0 and the pointers will meet.
+
+We can guarantee that this is an `O(n)` time solution because the gap between the two pointers inside of a cycle is at most n - 1, where n is the number of elements in the linked list.
+
+This algorithm is known as **Floyd's Cycle Detection Algorithm**
+
+```python
+def hasCycle(self, head: Optional[ListNode]) -> bool:
+    slow, fast = head, head
+
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
+```
 
 ## 143. Reorder Linked List
 
