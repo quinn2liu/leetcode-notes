@@ -41,3 +41,20 @@ initialize a `dict` of key's and values from an array, where the keys are indexe
     - `maxValue = max(dict.values())`
     - can also do `min()`, and also for `dict.keys()` 
 
+## Dictionary Keys
+
+User-specified objects (unless there are defined `__eq__` or `__hash__` methods) are hashable using the object's id (aka referenced similarity instead of object similarity).
+
+```python
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+```
+
+In this case, `a, b = Node(1), Node(1)`, `a == b` is False, because they are different objects. This means that we can use them as keys in a dict.
+
+## "None" as a Key
+
+Along the same vein, you can use `None` as a key in a dictionary as well.

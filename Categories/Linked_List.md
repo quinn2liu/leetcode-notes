@@ -183,3 +183,99 @@ Thus, removing the node is as simple as doing `prev.next = prev.next.next`
 
 Lastly, we return `dummy.next`. We do this in case the node to be deleted is the first one. If this is the case, 
 
+## 2. Add Two Numbers
+
+You are given two non-empty linked lists, `l1` and `l2`, where each represents a non-negative integer.
+
+The digits are stored in reverse order, e.g. the number 321 is represented as 1 -> 2 -> 3 -> in the linked list.
+
+Each of the nodes contains a single digit. You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Return the sum of the two numbers as a linked list.
+
+- Time: O(n)
+- Space: O(1)
+
+### Key Takeaways
+
+This is a relatively straightforward problem, but I think that there are a few good takeaways to have from this problem because it's a classic example of me overthinking. The solution is as follows:
+
+```python
+def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+
+    dummy = ListNode()
+    temp = dummy
+
+    carry = False
+    while l1 or l2 or carry: # we do or instead of and because if any of these are true, we should continue adding nodes to the list
+        v1 = l1.val if l1 else 0
+        v2 = l2.val if l2 else 0
+
+        result = v1 + v2 + (1 if carry else 0)
+
+        carry = result > 9
+        result = result % 10
+        temp.next = ListNode(result)
+        temp = temp.next
+
+        l1 = l1.next if l1 else None
+        l2 = l2.next if l2 else None
+    
+    return dummy.next
+```
+
+- We still create a new list that's `O(max(m, n))` space to return, but other that we use `O(1)` space. Originally the problem asks for an `O(1)` space solution, so that was a bit confusing. But in general it seems like this space is fine.
+
+- Instead of breaking the code up into multiple parts to handle the carrying, the while loop is an intuitive solution.
+    - Since we are creating a new node for each iteration, you can do `while l1 or l2 or carry:`, since if any of those conditions are true, we should go ahead and add a new node (and not repeat any work)
+
+
+## 138. Copy List with Random Pointer
+
+You are given the head of a linked list of length `n`. Unlike a singly linked list, each node contains an additional pointer random, which may point to any node in the list, or `None`.
+
+Create a deep copy of the list.
+
+The deep copy should consist of exactly `n` new nodes, each including:
+
+- The original value val of the copied node
+- A next pointer to the new node corresponding to the next pointer of the original node
+- A random pointer to the new node corresponding to the random pointer of the original node
+
+Note: None of the pointers in the new list should point to nodes in the original list.
+
+Return the head of the copied linked list.
+
+### Key Takeaways
+
+This problem had me so stumped for multiple reasons, but I eventually stumbled across the answer. The main difficulty is that you need some way to access the copy of a node given the original version. At first I was struggling because I thought you couldn't use a `Node` as a key in a dictionary, but you actually can.
+
+Given this information, I did a double mapping where I mapped the original node to it's index, and then the original node to its random's index (and then stored nodes in an array). This overcomplicated things though.
+
+Since the original node contains pointers to its original `next` and `random` nodes, we can get away with just mapping original nodes to their copies. You can see an implementation of this below.
+
+We can actually do this in one pass because we can initialize the `oldToCopy` map with default nodes for any key using a `defaultdict`
+
+    oldToCopy = collections.defaultdict(lambda: Node(0))
+    oldToCopy[None] = None
+
+And then when we encounter them, just populate the correct value (since the pointers are going to the right place)
+
+```python
+def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+    oldToCopy = {None: None}
+    temp = head
+    while temp:
+        node = Node(temp.val)
+        oldToCopy[temp] = node
+        temp = temp.next
+
+    temp = head
+    while temp:
+        node = oldToCopy[temp]
+        node.next = oldToCopy[temp.next]
+        node.random = oldToCopy[temp.random]
+        temp = temp.next
+    
+    return oldToCopy[head]
+```

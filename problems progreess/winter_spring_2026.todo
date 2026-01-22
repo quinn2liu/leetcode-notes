@@ -1,6 +1,6 @@
 Winter/Spring 2026:
     Easy:
-        Arrays:
+        Arrays and Hashing:
             ✔ Contains Duplicate @done(26-01-11 15:23)
             ✔ Valid Anagram @done(26-01-11 15:41)
             ✔ Two Sum @done(26-01-11 16:10)
@@ -42,9 +42,9 @@ Winter/Spring 2026:
             ☐ Missing Number
 
     Medium:
-        Array:
+        Arrays and Hashing:
             ☐ Group Anagrams
-            ☐ Top K Frequent Elements
+            ✔ Top K Frequent Elements @done(26-01-19 21:41)
             ☐ Encode and Decode Strings
             ☐ Product of Array Except Self
             ☐ Valid Sudoku
@@ -71,8 +71,8 @@ Winter/Spring 2026:
         Linked List:
             ☐ Reorder List
             ☐ Remove Nth Node From End of List
-            ☐ Copy List with Random Pointer
-            ☐ Add Two Numbers
+            ✔ Copy List with Random Pointer @done(26-01-21 21:24)
+            ✔ Add Two Numbers @done(26-01-21 20:16)
             ☐ Find the Duplicate Number
             ☐ LRU Cache
         Trees:
@@ -111,7 +111,7 @@ Winter/Spring 2026:
             ☐ Surrounded Regions
             ☐ Course Schedule
             ☐ Course Schedule II
-            ☐ Graph Valid Tree
+            ✔ Graph Valid Tree @done(26-01-20 20:45)
             ☐ Number of Connected Components in an Undirected Graph
             ☐ Redundant Connection
         Advanced Graphs:

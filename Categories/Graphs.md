@@ -4,11 +4,97 @@
 
 ### Graph Representations
 
-*Adjacency List*
+**Adjacency List**
 
-*Node*
+An adjacency list can take many forms, but it's essentially some form of map where the key is a node and the value is a list of nodes that are neighbors to that node.
 
-*Edge List*
+**ex: Directed**
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['C'],
+    'C': []
+}
+```
+
+**ex: Undirected**
+```python
+graph = {
+    'A': ['B'],
+    'B': ['A', 'C'],
+    'C': ['B']
+}
+```
+
+**ex: Weighted**
+```python
+graph = {
+    'A': [('B', 5), ('C', 2)],
+    'B': [('C', 1)]
+}
+```
+- ^^ will need to account for repeat edges
+
+Pros:
+- fast neightbor iteration (BFS, DFS)
+- easy to modify
+Cons:
+- checking if an edge exists (unless using sets)
+
+**Adjacency Matrix**
+
+An adjacency matrix is a 2d array where `matrix[i][j]` indicates whether there is an edge (or that edge's weight). *Note:* in an undirected graph, a value should exist for both `matrix[i][j]` and `matrix[j][i]`
+
+**ex: Unweighted**
+```python
+graph = [
+    [0, 1, 1],
+    [0, 0, 1],
+    [0, 0, 0]
+]
+```
+
+**ex: Weighted**
+```python
+INF = float('inf')
+graph = [
+    [0, 5, 2],
+    [INF, 0, 1],
+    [INF, INF, 0]
+]
+```
+
+Pros:
+- O(1) edge lookup (can also be achieved with adj list)
+- good for dense graphs
+Cons:
+- O(V^2) memory
+- slower to iterate neighbors
+
+***Edge List***
+Stores edges as pairs (triples for weights)
+
+**ex: Unweighted**
+```python
+edges = [
+    ('A', 'B'),
+    ('A', 'C'),
+    ('B', 'C')
+]
+```
+
+**ex: Weighted**
+```python
+edges = [
+    ('A', 'B', 5),
+    ('A', 'C', 2)
+]
+```
+
+
+**Node**
+
+
 
 ### DFS:
 
@@ -305,3 +391,59 @@ So, all we have to do is define a bfs helper function that explores a given node
                     q.append(neighbor)
                     visited[neighbor] = True
     
+## 261. Graph Valid Tree
+
+Given `n` nodes labeled from `0` to `n - 1` and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
+
+You can assume that no duplicate edges will appear in edges. Since all edges are undirected, `[0, 1]` is the same as `[1, 0]` and thus will not appear together in edges.
+
+### Key Takeaways
+
+So my initial struggle with this problem was that it was given to me too vaguely (thanks chatgpt), but there are 2 main parts to this problem. 
+
+1. **What makes a graph a tree vs. not a tree?**
+    - A tree is a specal type of graph, which specifically has no cycles and is fully connected (all nodes are reachable).
+2. **How do you check these conditions?**
+
+Since we are told nodes are uniquely labeled `0` to `n - 1`, we can do a simple check by iterating through the edges and seeing whether any of the node isn't seen.
+
+To check for a cycle, though, the most-intuitive method for me is to traverse the graph in level-order traversal (bfs) and keep track of the nodes visited up until that point. You can also use dfs (just need to traverse the graph), but I think it makes more sense in my head using bfs.
+
+However, given an edge list you can't do either of these traversals, since you need to know all of a node's children at once. **So, the solution for this is to create an adjacency list from our edge list to traverse the graph.** This is simple because the nodes are labeled via unique numbers. The one caveat is that since we are given unique edges, we have to create bi-directional edges in the adjacency list (`u -> v` and `v -> u`).
+
+The last twist in this problem is that when doing bfs, your queue doesn't just contain a queue of lists to be processed, but rather the **node and it's parent**. 
+
+**Let's use `u` and `v` as an example:**
+- When we process `u` and add it to `visited`, we then add all of `adj[u]` to the queue (now `v` is in the queue). When we later process `v`, `u` is going to show up in `adj[v]`, but since `u` is already in `visited`, we wrongly return false. 
+- So to solve this, we will append `(node, parent)` tuples to the queue instead of just the node. So as we're checking through the children in `adj[node]`, if `child == parent`, that means that this edge is not creating a cycle but rather the other-direction of that node's parent edge.
+
+```python
+def validTree(self, n: int, edges: List[List[int]]) -> bool:
+    if len(edges) > n - 1:
+        return False
+
+    adj = [[] for _ in range(n)]
+    for u, v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+
+    q = deque()
+    visited = set()
+
+    q.append((0, -1)) # initial value, 0 shouldn't have a parent
+
+    while len(q) > 0:
+        node, parent = q.popleft()
+        visited.add(node)
+        children = adj[node]
+
+        for child in children:
+            if child == parent: 
+                continue
+            if child in visited: 
+                return False
+            else: 
+                q.append((child, node))
+    
+    return len(visited) == n
+```
