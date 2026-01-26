@@ -54,7 +54,7 @@ Winter/Spring 2026:
             ☐ 3Sum
             ☐ Container With Most Water
         Sliding Window:
-            ☐ Longest Substring Without Repeating Characters
+            ✔ Longest Substring Without Repeating Characters @done(26-01-22 11:23)
             ☐ Longest Repeating Character Replacement
             ☐ Permutation in String
         Stack:
@@ -78,7 +78,7 @@ Winter/Spring 2026:
         Trees:
             ☐ Lowest Common Ancestor of a Binary Search Tree
             ☐ Binary Tree Level Order Traversal
-            ☐ Binary Tree Right Side View
+            ✔ Binary Tree Right Side View @done(26-01-22 10:24)
             ☐ Count Good Nodes in Binary Tree
             ☐ Validate Binary Search Tree
             ☐ Kth Smallest Element in a BST
@@ -96,14 +96,14 @@ Winter/Spring 2026:
             ☐ Subsets II
             ☐ Generate Parentheses
             ☐ Word Search II
-            ☐ Palindrome Partitioning
+            ✔ Palindrome Partitioning @done(26-01-22 13:06)
             ☐ Letter Combinations of a Phone Number
         Tries:
             ☐ Implement Trie (Prefix Tree)
             ☐ Design Add and Search Words Data Structure
         Graphs:
-            ☐ Number of Islands
-            ☐ Max Area of Island
+            ✔ Number of Islands @done(26-01-26 11:01)
+            ✔ Max Area of Island @done(26-01-25 16:46)
             ☐ Clone Graph
             ☐ Walls and Gates
             ☐ Rotting Oranges
@@ -115,7 +115,7 @@ Winter/Spring 2026:
             ☐ Number of Connected Components in an Undirected Graph
             ☐ Redundant Connection
         Advanced Graphs:
-            ☐ Network Delay Time
+            ✔ Network Delay Time @done(26-01-25 15:21)
             ☐ Min Cost to Connect All Points (after reconstruct itinerary)
             ☐ Cheapest Flights Within K Stops (do last in advanced graphs)
         1-D Dynamic Programming:
