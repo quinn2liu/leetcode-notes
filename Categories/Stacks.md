@@ -137,3 +137,74 @@ You have 2 stacks, one that tracks the minimum at that "level" of the stack, and
 
 Then whenever you pop, you also pop the min to maintain the invariant.
 
+## 678. Valid Parenthesis String
+
+You are given a string `s` which contains only three types of characters: `'('`, `')'` and `'*'`.
+
+Return `true` if `s` is valid, otherwise return `false`.
+
+A string is valid if it follows all of the following rules:
+- Every left parenthesis `'('` must have a corresponding right parenthesis `')'`.
+- Every right parenthesis `')'` must have a corresponding left parenthesis `'('`.
+- Left parenthesis `'('` must go before the corresponding right parenthesis `')'`.
+- A `'*'` could be treated as a right parenthesis `')'` character or a left parenthesis `'('` character, or as an empty string `""`.
+
+### Key Takeaways
+
+There are 2 ways to do this problem efficiently (and then a brute force version). The key difficulty is that while scanning `s`, you have no way of knowing what the `'*'` should be at that time. 
+
+The **brute force** way of handling this is to use a decision tree, where you do a recursive call for each of the 3 possibilities of `'*'`. 
+- For each of these calls (depending on what it is), you should keep track of the number of "unclosed" open brackets. Encountering a `)` or setting a wildcard as `)` would reduce this by one, and if you reach the end of the string then and the # of left closing brackets is 0, then it's valid.
+
+The **less-intuitive but optimal solution** is a greedy solution. As mentioned above, you can think about whether parenthesis are valid based on the number of "unclosed" open brackets there are at that point in the string.
+
+- however, instead of trying all possibilities when encountering `'*'`, you can think of the scenario for if we count it as open or closed.
+- if it's open, the number of unclosed increases by one, whereas if it's closed, the number of unclosed decreases by one.
+- so, we can keep track of both the min and max possible unclosed brackets at that time, which we update as follows:
+    - if `(`, `min += 1` and `max += 1`
+    - if `*`, `min -= 1` (considering it as `)`) and `max += 1` (considering it as `(`).
+    - if `)`, `min -= 1` and `max -= 1` 
+
+- If at any point `max < 0`, then return false (since at this point, there are more `)` than both `(` and `*`).
+- If `leftMin < 0`, then `leftMin = 0` (if we get here, then `leftMax > 0`, so there for sure some `*`, which we can treat as empty)
+
+The more-intuitive version is a stacks approach, which is more similar to the first version of this problem.
+
+The key is recognizing that we should first try and close any closing brackets that we see using open brackets (and `*` if necessary). Then, if there are any remaining open brackets, try closing them with the stars.
+- the reasoning is that every `(` and `)` needs to be closed, so we should try and closing as many of them with each other that we can. And then any extra `*` can close or be empty if needed.
+
+So to be able to do both of these checks, we need to keep track of the positions of `(` and `*`, in their own separate stacks.
+
+The code looks like something that this:
+
+```python
+def checkValidString(self, s: str) -> bool:
+
+    starStack = []
+    openStack = []
+
+    for i, c in enumerate(s):
+        if c == "(":
+            openStack.append(i)
+        elif c == "*":
+            starStack.append(i)
+        else: # c == ")"
+            if openStack:
+                openStack.pop()
+                continue
+            elif starStack:
+                starStack.pop()
+                continue
+            else: # no valid elements in either stack to close this bracket
+                return False
+    
+    while len(openStack) > 0 and len(starStack) > 0:
+        openI, starI = openStack.pop(), starStack.pop()
+        if openI > starI:
+            return False
+    
+    return False if len(openStack) > 0 else True
+```
+
+- ^^ the final check is in case there are lingering `(` after closing all the `)`. In case of lingering `(`, we need to check if there is a `*` to its right. Since we've been storing the positions of `(` and `*` in stacks, we can pop from both and count this as "closing".
+- if the position of the right-most `(` is farther than the right-most `*`, then this `(` can't actually be closed, so we return `False`.
