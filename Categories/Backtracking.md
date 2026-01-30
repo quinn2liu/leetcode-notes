@@ -6,6 +6,8 @@ At least for these problems, "backtracking" results in some decision tree. One b
 
 Since this is a decision **tree**, can traverse it using a dfs (recursion)
 
+Backtracking is also usually used if you need to build a solution step by step and/or do some sort of exhaustive search over all possibilities.
+
 ## 39. Combination Target Sum
 
 You are given an array of **distinct** integers `nums` and a target integer `target`. Your task is to return a list of all **unique combinations** of `nums` where the chosen numbers sum to `target`.

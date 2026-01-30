@@ -87,3 +87,53 @@ Okay so... I had the right idea but I guess you can't copy? But the main solutio
             l += 1
         
         return count
+
+## 647. Palindromic Strings
+
+Given a string `s`, return the number of substrings within s that are palindromes.
+
+A palindrome is a string that reads the same forward and backward.
+
+*Example:*
+
+    Input: s = "aaa"
+    Output: 6
+
+- ^^ while this is counting "duplicate" value substrings, substrings are deemed unique based on their indices within the original string.
+
+### Key Takeaways
+
+First, this is listed as a dynamic programming problem but tbh the DP solution is just way harder to understand than the 2 pointers solution.
+
+The key thing to note about this problem is how we check for palindromes. The intuitive way to check whether a string is a palindrome is to have two pointers at the ends, and then move them in while checking that the characters there are equal.
+
+- If we use this approach, that means we have to first get every possible substring (O(n^2)) and check whether they're a valid palindrome (O(n)).
+
+An alternative way to check/think about palindromes is to start from the center of the substring. From the center, we can move outwards and check the ends.
+- one caveat is that you need to handle even and odd length substrings.
+    - this can be handled by setting the `l` and `r` pointers to be equal for odd, and then `r = l + 1` in the even case.
+
+So, instead of generating all possible substrings, you instead look at all of the possible palindromes centered at a specific character, for all characters in the string.
+
+**NOTE:** this problem is probably helpful when you break down what it looks like to check palindromes from the center. i.e. breaking down how you check an odd-length palindrome from the center vs. an even-length palindrome from the center.
+
+```python
+def countSubstrings(self, s: str) -> int:
+    res = 0
+
+    dp = [[False for _ in range(len(s))] for _ in range(len(s))]
+
+    for i in range(len(s)):
+        for j in range(len(s)):
+            if i == j:
+                dp[i][j] = True
+            if j = i + 1 and s[i] == s[j]:
+                dp[i][j] = True
+
+    for i in range(len(s)):
+        for j in range(len(s)):
+            dp[i][j] = dp[i+1][j-1] and s[i] == s[j]
+            if dp[i][j]:
+                res += 1
+    return res
+```
