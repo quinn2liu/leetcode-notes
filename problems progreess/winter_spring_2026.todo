@@ -43,7 +43,7 @@ Winter/Spring 2026:
 
     Medium:
         Arrays and Hashing:
-            ☐ Group Anagrams
+            ✔ Group Anagrams @done(26-01-30 22:51)
             ✔ Top K Frequent Elements @done(26-01-19 21:41)
             ☐ Encode and Decode Strings
             ☐ Product of Array Except Self
@@ -134,7 +134,7 @@ Winter/Spring 2026:
             ☐ Longest Common Subsequence
             ☐ Best Time to Buy and Sell Stock with Cooldown
             ☐ Coin Change II
-            ☐ Target Sum
+            ✔ Target Sum @done(26-01-30 00:11)
             ☐ Interleaving String
             ☐ Edit Distance (do after Distinct Subsequences)
         Greedy:

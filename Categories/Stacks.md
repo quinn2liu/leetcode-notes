@@ -32,39 +32,40 @@ You need some way of tracking the order of k's so that you can construct the dif
 So, you can track this using a `strStack` and `countStack`. `strStack` tracks the current "encoded" string we are constructing and the corresponding entry in `countStack` represents the eventual `k` value to multiply the encoded string by.
 
 We will process `s` by each character, and depending on what the character is, we'll perform different actions:
+
+```python
+k = 0
+self.index = 0
+res = ""
+
+for i in range(len(s)):
+    c = s[i]
+
+    if c.isdigit():
+        k = k * 10 + int(c)
     
-    k = 0
-    self.index = 0
-    res = ""
+    elif c == '[':
+        strStack.append("")
+        countStack.append(k)
+        k = 0
+    
+    elif c == ']':
+        count = countStack.pop()
+        appendStr = count * strStack.pop()
 
-    for i in range(len(s)):
-        c = s[i]
-
-        if c.isdigit():
-            k = k * 10 + int(c)
-        
-        elif c == '[':
-            strStack.append("")
-            countStack.append(k)
-            k = 0
-        
-        elif c == ']':
-            count = countStack.pop()
-            appendStr = count * strStack.pop()
-
-            if strStack:
-                strStack[-1] += appendStr
-            else:
-                res += appendStr
-        
+        if strStack:
+            strStack[-1] += appendStr
         else:
-            if strStack:
-                strStack[-1] += c
-            else:
-                res += c
+            res += appendStr
     
-    return res
+    else:
+        if strStack:
+            strStack[-1] += c
+        else:
+            res += c
 
+return res
+```
 So as a quick recap:
 
 - `if c == '['`
@@ -88,28 +89,28 @@ The recursive solution follows a similar principle, but with recursive function 
 Instead of specifying a string and count stack, these are stored at the function call level.
 
 so the helper looks something like this:
-
-    def helper():
-        k = 0
-        res = ""
-        while self.i < len(s):
-            c = s[i]
-            if c.isdigit():
-                k = k * 10 + int(c)
-            
-            elif c == '[':
-                self.i += 1
-                res += k * helper()
-                k = 0
-            
-            elif c == ']':
-                return res                
-            else:
-                res += c
+```python
+def helper():
+    k = 0
+    res = ""
+    while self.i < len(s):
+        c = s[i]
+        if c.isdigit():
+            k = k * 10 + int(c)
+        
+        elif c == '[':
             self.i += 1
+            res += k * helper()
+            k = 0
+        
+        elif c == ']':
+            return res                
+        else:
+            res += c
+        self.i += 1
 
-        return res
-    
+    return res
+```
 Each call of helper represents the current encoding layer we're on. So k and res are initialized to default values. 
 
 - When we encounter `[`, that means we should go down a layer, aka update `res = k * helper()` and reset k (since we've "used" this k value).
@@ -208,3 +209,44 @@ def checkValidString(self, s: str) -> bool:
 
 - ^^ the final check is in case there are lingering `(` after closing all the `)`. In case of lingering `(`, we need to check if there is a `*` to its right. Since we've been storing the positions of `(` and `*` in stacks, we can pop from both and count this as "closing".
 - if the position of the right-most `(` is farther than the right-most `*`, then this `(` can't actually be closed, so we return `False`.
+
+## 853. Car Fleet
+
+There are `n` cars traveling to the same destination on a one-lane highway.
+
+You are given two arrays of integers `position` and `speed`, both of length n.
+
+- `position`[i] is the position of the ith car (in miles)
+- `speed`[i] is the speed of the ith car (in miles per hour)
+
+The **destination** is at position `target` miles.
+
+A car can not pass another car ahead of it. It can only catch up to another car and then drive at the same speed as the car ahead of it.
+
+A car fleet is a non-empty set of cars driving at the same position and same speed. A single car is also considered a car fleet.
+
+If a car catches up to a car fleet the moment the fleet reaches the destination, then the car is considered to be part of the fleet.
+
+Return the number of **different car fleets** that will arrive at the destination.
+
+### Key Takeaways
+
+So I'd say this problem boils down to 1 main question: **How can you determine (without simulating) whether any 2 cars will result in a fleet?**
+
+- You can calculate the `time` it takes for a car to reach the destination by doing `(target - position) / speed`.
+- if car a's `time` is less than car b's `time` to reach the destination (and car b's position is ahead of car s's) then you have a fleet
+
+While you can go through each pair of cars and eliminate one if it ends up bottlenecked (join a fleet), you'd end up with an O(n^2) time algorithm, since you would have to keep iterating through the cars and processing each pair.
+
+So to do this more systematically, since you know that a car can only be bottlenecked by a car ahead of it position-wise, you can start by sorting the cars in descending order based on their positions.
+
+Then, by using a stack, we process each car by comparing its time to the fleet with the highest time which starts before it.
+- in other words, the top of the stack represents the fleet that starts before our current car and its time to reach the destination
+- if the current car's time is <= fleet's time, then it will just join the fleet and we continue
+- else (curr time > fleet), this car becomes it's own fleet and is added to the stack.
+
+### **Note:** there are several ways in which it's intuitive to use a stack here.
+- you sort to process elements in a specific order (position desc order)
+    - or scan in one direction in general 
+- each element only interacts with its predecessor (LIFO)
+- only the boundary values survive (in this case, we only care about the most-recent fleet)
