@@ -55,6 +55,19 @@ class Node:
 
 In this case, `a, b = Node(1), Node(1)`, `a == b` is False, because they are different objects. This means that we can use them as keys in a dict.
 
+### Array/Tuple/Set as Key
+
+There are some important caveats when using different data types as dictionary keys in python. The main thing is that the key has to be hashable (and in these cases, their elements have to be hashable).
+
+An array is mutable and thus is not hashable, but you can get around this with either of the following options:
+
+1. Tuple as a key
+    - you can convert the array to a tuple (if you're fine with not ever mutating it)
+    - `resTuple = tuple(originalArray)`
+2. Set as a key
+    - you can't use a standard set because it's mutable, but you can instead use a `frozenset()`
+    - frozen sets are sets that can't add or remove elements (but can still be used for union, intersection, difference)
+
 ## "None" as a Key
 
 Along the same vein, you can use `None` as a key in a dictionary as well.

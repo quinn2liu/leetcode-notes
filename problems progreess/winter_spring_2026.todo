@@ -45,13 +45,13 @@ Winter/Spring 2026:
         Arrays and Hashing:
             ✔ Group Anagrams @done(26-01-30 22:51)
             ✔ Top K Frequent Elements @done(26-01-19 21:41)
-            ☐ Encode and Decode Strings
-            ☐ Product of Array Except Self
+            ✔ Encode and Decode Strings @done(26-01-31 12:09)
+            ✔ Product of Array Except Self @done(26-01-31 12:26)
             ☐ Valid Sudoku
             ☐ Longest Consecutive Sequence
         Two Pointers:
-            ☐ Two Sum II - Input Array Is Sorted
-            ☐ 3Sum
+            ✔ Two Sum II - Input Array Is Sorted @done(26-01-31 01:00)
+            ✔ 3Sum @done(26-01-31 00:56)
             ☐ Container With Most Water
         Sliding Window:
             ✔ Longest Substring Without Repeating Characters @done(26-01-22 11:23)

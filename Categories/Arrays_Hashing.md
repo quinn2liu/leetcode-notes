@@ -101,7 +101,7 @@ If we want to better generalize the solution, we can do this:
 
 The main difference here is that the encoding is formatted so that the characters up to the first `#` represent the size of the string. This means that we don't need a standard length of characters to represent the length of each word.
 
-## 238. Products of Array Discluding Self
+## 238. Products of Array Except Self
 
 Given an integer array `nums`, return an array `output` where `output[i]` is the product of all the elements of nums except `nums[i]`.
 
