@@ -52,7 +52,7 @@ Winter/Spring 2026:
         Two Pointers:
             ✔ Two Sum II - Input Array Is Sorted @done(26-01-31 01:00)
             ✔ 3Sum @done(26-01-31 00:56)
-            ☐ Container With Most Water
+            ✔ Container With Most Water @done(26-02-03 13:21)
         Sliding Window:
             ✔ Longest Substring Without Repeating Characters @done(26-01-22 11:23)
             ☐ Longest Repeating Character Replacement
@@ -80,7 +80,7 @@ Winter/Spring 2026:
             ☐ Binary Tree Level Order Traversal
             ✔ Binary Tree Right Side View @done(26-01-22 10:24)
             ☐ Count Good Nodes in Binary Tree
-            ☐ Validate Binary Search Tree
+            ✔ Validate Binary Search Tree @done(26-02-03 14:15)
             ✔ Kth Smallest Element in a BST @done(26-01-28 21:11)
             ☐ Construct Binary Tree from Preorder and Inorder Traversal
         Heap / Priority Queue:
