@@ -37,7 +37,7 @@ struct Porsche911: Drivable {
 
 struct Motorcycle: Drivable {
     var motor: Motor
-    var wheels; Int
+    var wheels: Int
     
     // Motorcycle-specific code ehre
 }
@@ -45,7 +45,7 @@ struct Motorcycle: Drivable {
 let myPorsche = Porsche911(motor: Motor(), wheels: 4)
 let myMotorcycle = Motorcycle(motor: Motor(), wheels: 2)
 
-driveHome(vehicle; myPorsche)
+driveHome(vehicle: myPorsche)
 driveHome(vehicle: myMotorcycle)
 ```
 

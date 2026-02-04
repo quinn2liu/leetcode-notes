@@ -48,7 +48,7 @@ Winter/Spring 2026:
             ✔ Encode and Decode Strings @done(26-01-31 12:09)
             ✔ Product of Array Except Self @done(26-01-31 12:26)
             ☐ Valid Sudoku
-            ☐ Longest Consecutive Sequence
+            ✔ Longest Consecutive Sequence @done(26-02-03 21:08)
         Two Pointers:
             ✔ Two Sum II - Input Array Is Sorted @done(26-01-31 01:00)
             ✔ 3Sum @done(26-01-31 00:56)
@@ -85,7 +85,7 @@ Winter/Spring 2026:
             ☐ Construct Binary Tree from Preorder and Inorder Traversal
         Heap / Priority Queue:
             ☐ K Closest Points to Origin
-            ☐ Kth Largest Element in an Array
+            ✔ Kth Largest Element in an Array @done(26-02-03 21:29)
             ☐ Task Scheduler
             ☐ Design Twitter
         Backtracking:
