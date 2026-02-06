@@ -279,3 +279,80 @@ def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
     
     return oldToCopy[head]
 ```
+
+## 1429. First Unique Number
+
+You have a queue of integers, you need to retrieve the first unique integer in the queue.
+
+Implement the `FirstUnique` class:
+
+- `FirstUnique(int[] nums)` Initializes the object with the numbers in the queue.
+- `int showFirstUnique()` returns the value of the first unique integer of the queue, and returns `-1` if there is no such integer.
+- `void add(int value)` insert value to the queue.
+
+### Key Takeaways
+
+You are performing 2 different operations with the `add()` and `showFirstUnique()` functions. With `add()`, you are inserting an element while somehow marking/checking whether it already exists in the queue. With `showFirstUnique()`, you are getting the first element s.t. there are no duplicates.
+
+The issue you run into here is that both `add()` and `showFirstUnique()` have to be `O(1)` operations. This is where you get tradeoffs depending on your implementation.
+- if you just store in an array, insertion is `O(1)` but retrieval is `O(n)`.
+- if you use a hashmap to map values to counts, insertion is `O(1)` but retrival is still `O(n)`
+
+Thus, this points us to a **linked list** approach. This is because a linked list maintains the original order in which nums are added, and also gives us `O(1)` access to any node, allowing us to remove it from the sequence if it's repeated.
+
+**Notes:**
+- Doubly Linked Lists need a `next` and `prev` pointer.
+- For tracking the linked list, you need a `head` and (or) a `tail` pointer. This is so we can add or remove nodes from either side of the list.
+
+```python
+class Node:
+    def __init__(self, val, prev = None, next = None):
+        self.val = val
+        self.prev = prev
+        self.next = next
+
+class FirstUnique:
+    def __init__(self, nums: List[int]):
+        self.nodeMap = {} # value to node mapping
+        self.head = None
+        self.tail = None
+
+        for num in nums:
+            self.add(num)
+
+    def showFirstUnique(self) -> int:
+        print(f"nodeMap: {self.nodeMap}")
+        return self.head.val if self.head else -1
+
+    def add(self, value: int) -> None:
+        # if the node doesn't exist, add
+        if value not in self.nodeMap:
+            node = Node(value)
+            self.nodeMap[value] = node
+
+            if not self.head: # initialize list/map
+                self.head = node
+                self.tail = node
+            else: # add to the tail
+                node.prev = self.tail
+                self.tail.next = node
+                self.tail = node
+
+        else: # the value exists in the map, so remove it from the list
+            node = self.nodeMap[value]
+            if node: # checking whether we've alr removed this node
+                nodePrev, nodeNext = node.prev, node.next
+                
+                if nodePrev:
+                    nodePrev.next = nodeNext
+                else: # no previous, meaning we are removing the ehad
+                    self.head = nodeNext
+
+                if nodeNext: 
+                    nodeNext.prev = nodePrev
+                else: # removing the tail 
+                    self.tail = nodePrev
+                node.prev = None
+                node.next = None
+                self.nodeMap[value] = None
+```

@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab {
-                NetworkCallsExampleView()
+                GHUserContentView()
             } label: {
                 Label("GitHub User", systemImage: "square.and.arrow.up.fill")
             }
