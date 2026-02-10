@@ -1,0 +1,121 @@
+{
+    "currentWeather": {
+        "description": "Dry and hot",
+        "feelsLikeTemperature": {
+            "celsius": {
+                "_0": 19.48,
+            },
+        },
+        "rainChancePercent": 62,
+        "humidityPercent": 27,
+        "airPressureDescription": "1019 hPa",
+        "wind": {
+            "direction": "northwest",
+            "speed": {
+                "kilometersPerHour": {
+                    "_0": 13.93,
+                },
+            },
+        },
+    },
+    "predictedWeathers": [
+        {
+            "day": "Monday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": 18.02,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 18.97,
+                },
+            },
+            "description": "Overcast",
+        },
+        {
+            "day": "Tuesday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": 18.24,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 27.14,
+                },
+            },
+            "description": "Raining",
+        },
+        {
+            "day": "Wednesday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": 9.86,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 33.14,
+                },
+            },
+            "description": "Drizzle",
+        },
+        {
+            "day": "Thursday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": 10.68,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 20.2,
+                },
+            },
+            "description": "Sunny",
+        },
+        {
+            "day": "Friday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": -0.8,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 40.67,
+                },
+            },
+            "description": "Drizzle",
+        },
+        {
+            "day": "Saturday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": 6.67,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 29.04,
+                },
+            },
+            "description": "Drizzle",
+        },
+        {
+            "day": "Sunday",
+            "minimumTemperature": {
+                "celsius": {
+                    "_0": -0.95,
+                },
+            },
+            "maximumTemperature": {
+                "celsius": {
+                    "_0": 36.48,
+                },
+            },
+            "description": "Raining",
+        },
+    ],
+}

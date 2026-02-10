@@ -1,0 +1,5 @@
+//
+//  Copyright © Uber Technologies, Inc. All rights reserved.
+//
+
+struct GetCitiesRequest {}
