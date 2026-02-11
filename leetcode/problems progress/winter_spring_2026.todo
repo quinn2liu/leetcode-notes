@@ -56,7 +56,7 @@ Winter/Spring 2026:
         Sliding Window:
             ✔ Longest Substring Without Repeating Characters @done(26-01-22 11:23)
             ☐ Longest Repeating Character Replacement
-            ☐ Permutation in String
+            ✔ Permutation in String @done(26-02-10 00:40)
         Stack:
             ☐ Min Stack
             ☐ Evaluate Reverse Polish Notation
@@ -110,7 +110,7 @@ Winter/Spring 2026:
             ☐ Pacific Atlantic Water Flow
             ☐ Surrounded Regions
             ☐ Course Schedule
-            ☐ Course Schedule II
+            ✔ Course Schedule II @done(26-02-10 21:10)
             ✔ Graph Valid Tree @done(26-01-20 20:45)
             ✔ Number of Connected Components in an Undirected Graph @done(26-01-27 23:22)
             ☐ Redundant Connection
@@ -147,7 +147,7 @@ Winter/Spring 2026:
             ☐ Parition Labels
             ✔ Valid Parentheses String @done(26-01-26 14:35)
         Intervals:
-            ☐ Insert Interval
+            ✔ Insert Interval @done(26-02-10 20:47)
             ☐ Merge Intervals
             ☐ Non Overlapping Intervals
             ☐ Meeting Rooms II (do after Meeting Rooms)

@@ -35,3 +35,54 @@ This is where a **min heap** comes in handy. We can represent the rooms with whi
 So, the algorithm process each meeting at a time and pushes it to the min heap. The only check is whether we need to pop the earliest-ending meeting (in this case, that meeting will have concluded by the time we are scheduling this one, so we can remove it).
 
 And then, we return the size of our min heap.
+
+## Insert Interval
+
+You are given an array of non-overlapping intervals `intervals` where `intervals[i] = [start_i, end_i]` represents the start and the end time of the `ith` interval. `intervals` is initially sorted in ascending order by `start_i`.
+
+You are given another interval `newInterval = [start, end]`.
+
+Insert `newInterval` into `intervals` such that `intervals` is still sorted in ascending order by `start_i` and also `intervals` still does not have any overlapping intervals. You may merge the overlapping intervals if needed.
+
+Return `intervals` after adding `newInterval`.
+
+### Key Takeaways
+
+The intuition for this algorithm is straight forward, but it's the logic behind the for loop and the way we handle interval merging that is particularly notable for me.
+
+Intuitively, we should iterate to the point with which we want to insert the interval, merge any intervals if needed, and then continue.
+
+However, figuring out where to insert, how to merge, is not as intuitive as it sounds.
+
+1. We want to find the index/interval that is the first to merge with `newInterval`. This interval is determined to be the first interval whose end is greater than `newInterval`'s start.
+    - `interval[i][1] >= newInterval[0]`
+
+2. Now that we're here, we want to merge intervals such that any intervals overlapping with `newInterval` are merged in. 
+    - An interval overlaps with `newInterval` if `interval[i][1] >= newInterval[0]` (the interval's end is greater than the new one's start) OR if `interval[i][0] <= newInterval[1]` (the interval's start is before the new one's end)
+
+3. Maintaining this array is a bit cumbersome if you're trying to do it in place, so instead, we will maintain a result array and append intervals to it as they are ready.
+
+The final code looks like this:
+
+```python
+def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    n = len(intervals)
+    i = 0
+    res = []
+
+    while i < n and intervals[i][1] < newInterval[0]:
+        res.append(intervals[i])
+        i += 1
+
+    while i < n and newInterval[1] >= intervals[i][0]:
+        newInterval[0] = min(newInterval[0], intervals[i][0])
+        newInterval[1] = max(newInterval[1], intervals[i][1])
+        i += 1
+    res.append(newInterval)
+
+    while i < n:
+        res.append(intervals[i])
+        i += 1
+
+    return res
+```

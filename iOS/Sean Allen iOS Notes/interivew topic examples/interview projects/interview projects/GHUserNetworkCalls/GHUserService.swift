@@ -39,7 +39,7 @@ class GHUserService: GHUserServicing {
     }
     
     // MARK: get user details
-    func getDetailedUser(username: String) async throws -> GHUser {
+    func getDetailedUser<T: Hashable>(username: T) async throws -> GHUser {
         let urlString = "https://api.github.com/users/\(username)"
         
         guard let url = URL(string: urlString) else { throw GHUserServiceError.invalidURL }

@@ -447,3 +447,63 @@ def validTree(self, n: int, edges: List[List[int]]) -> bool:
     
     return len(visited) == n
 ```
+
+## 210. Course Schedule II
+
+You are given an array `prerequisites` where `prerequisites[i] = [a, b]` indicates that you must take course `b` first if you want to take course `a`.
+
+For example, the pair `[0, 1]`, indicates that to take course `0` you have to first take course `1`.
+There are a total of `numCourses` courses you are required to take, labeled from `0` to `numCourses - 1`.
+
+Return a valid ordering of courses you can take to finish all courses. If there are many valid answers, return **any of them**. If it's not possible to finish all courses, return an empty array.
+
+### Key Takeaways
+
+We can think of the courses as a directed graph, since we're given this dependency hierarchy (`[a, b]`, `b` must go before `a`). In this case, we can try and find a topological ordering. If we find a topological ordering, then we know that there is an ordering s.t. all courses' dependencies are taken before them.
+
+#### Algorithm (Kahn's Topological Sort):
+
+At a high level, Kahn's works by
+- taking nodes with `indegree = 0`
+- removing from the graph
+- gradually unlocking other nodes
+If at the end there are some nodes "locked", a cycle exists, so no valid order is possible
+
+1. Build the graph (adj list) and compute `indegree` for each of the courses (# of prerequisites)
+2. Add all courses with `indegree == 0` to the queue
+3. While the queue is not empty:
+    - remove a course and add to result
+    - reduce the indegree of the courses it depends on (children)
+    - if any dependent course now has `indegree == 0`, add it to the queue
+4. if all courses are processed (added to result), return the result
+5. else, return empty list
+
+We can tell if all courses are processed based on whether result has all of the courses.
+
+```python
+def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+    adjList = defaultdict(list)
+    indegrees = defaultdict(int)
+    
+    startNodes = set([n for n in range(numCourses)])
+
+    for a, b in prerequisites:
+        adjList[b].append(a)
+        indegrees[a] += 1
+        if a in startNodes:
+            startNodes.remove(a)
+
+    q = deque(list(startNodes))
+    res = []
+    while q:
+        curr = q.popleft()
+        if indegrees[curr] == 0:
+            res.append(curr)
+        
+        for child in adjList[curr]:
+            indegrees[child] -= 1
+            if indegrees[child] == 0:
+                q.append(child)
+
+    return res if len(res) == numCourses else [] 
+```

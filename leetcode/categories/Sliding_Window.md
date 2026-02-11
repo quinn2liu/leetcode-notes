@@ -10,7 +10,7 @@ Most of the time, you start by expanding the window until the window is no longe
 
 *Generally*, in case you need to keep track of the frequencies of some items using a dict. A nice way to add an element for the first time without an `if` statement is `myDict[key] = 1 + myDict.get(key, 0)`
 
-# 3. Longest Substring Without Duplicates
+## 3. Longest Substring Without Duplicates
 
 Given a string s, find the length of the longest substring without duplicate characters.
 
@@ -18,7 +18,7 @@ A substring is a contiguous sequence of characters within a string.
 
 ex: Input: s = "zxyzxyz", Output: 3
 
-## Key Takeaways
+### Key Takeaways
 
 This is a sliding window problem with a variable size. Here, `l` is used to maintain our no-duplicate substring, and `r` is expanding the window.
 
@@ -30,7 +30,7 @@ When there are no more duplicates, we then add `s[r]` to our set and then recalc
 
 This means that on the next iteration of r, we can say: "we know that [l:r - 1] has no duplicates and we've already checked if that length is the max. we will check if `s[r]` is a duplicate, if so we will move `l` until `s[r]` is no longer a duplicate, check it's length, and then repeat."
 
-# 424. Longest Repeating Substring with Replacement
+## 424. Longest Repeating Substring with Replacement
 
 You are given a string `s` consisting of only uppercase english characters and an integer `k`. You can choose up to `k` characters of the string and replace them with any other uppercase English character.
 
@@ -60,7 +60,7 @@ While this quantity is `> k`, the left pointer is moved until we have met this c
         
         return res
 
-# 76. Minimum Window Substring
+## 76. Minimum Window Substring
 
 Given two strings `s` and `t` of lengths m and n respectively, return the minimum window substring of `s` such that every character in `t` (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 
@@ -90,3 +90,60 @@ After adding `s[r]` to `window` and updating `have`, we do a `while have == need
 
 This shrinks our window (as we want the smallest substring), while still maintaining that we are tracking the shortest valid substring.
     
+## 567. Permutation in String
+
+You are given two strings `s1` and `s2`.
+
+Return `true` if `s2` contains a permutation of `s1`, or `false` otherwise. That means if a permutation of `s1` exists as a substring of `s2`, then return `true`.
+
+Both strings only contain lowercase letters.
+
+    Input: s1 = "abc", s2 = "lecabee"
+
+    Output: true
+
+### Key Takeaways.
+
+It's intuitive to use a sliding window to check each of the possible substrings, since we ultimately don't care about the order of the characters but rather the counts of the characters. If this was However, the difficulty is determining whether a substring is a permutation of `s1`.
+
+Anagrams are basically the same thing as permutations (for our use case), in which case we would be inclined to use the `[0] * 26` approach to store the count of each character. The issue with comparing these to determine if equal is that this is an `O(26)` operation, but repeated for each window in `s2`.
+
+So to get around this, we don't actually compare these two hash tables but rather keep track of how many `matches` there are at any given time. If we find a valid permutation, our two hash maps will match entirely (where characters in `s1` have their corresponding counts and the rest have a 0, and the `s2` counts will match). So, if `matches == 26`, then we've found a valid permutation.
+
+The main tricky thing, is when updating matches. As you can see below, you shouldn't subtract from matches every time they don't match, but only if the addition/subtraction of a letter causes a once-matching pair to no longer match.
+
+```python
+# initialize the counts
+for i in range(len(s1)): # 0 to len(s1) - 1
+    s1Count[ord(s1[i]) - ord('a')] += 1 
+    s2Count[ord(s2[i]) - ord('a')] += 1 
+
+# initialize matches
+matches = 0
+for i in range(len(s1Count)):
+    matches += 1 if s1Count[i] == s2Count[i] else 0
+
+l = 0
+for i in range(len(s1), len(s2)):
+    if matches == 26:
+        return True
+
+    # remove left pointer
+    leftCharIndex = ord(s2[l]) - ord('a')
+    s2Count[leftCharIndex] -= 1
+    if s2Count[leftCharIndex] == s1Count[leftCharIndex]: # removing this element made the two spaces match
+        matches += 1
+    elif s2Count[leftCharIndex] + 1 == s1Count[leftCharIndex]: # removing this element got rid of a valid match
+        matches -= 1
+    l += 1
+
+    # add right pointer
+    rightCharIndex = ord(s2[i]) - ord('a')
+    s2Count[rightCharIndex] += 1
+    if s2Count[rightCharIndex] == s1Count[rightCharIndex]: # adding this element made the counts match
+        matches += 1
+    elif s2Count[rightCharIndex] - 1 == s1Count[rightCharIndex]: # adding this element took a matching count and made them not matching
+        matches -= 1
+
+return matches == 26
+```

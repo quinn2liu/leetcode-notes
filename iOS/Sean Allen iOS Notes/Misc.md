@@ -82,3 +82,18 @@ The `final` keyword in Swift is a declaration modifier used to indicate that a *
 - need to review closures, specifically how to read closures in documentation / function definitions
 
 - what enums can do / how powerful they are
+
+## Key Paths
+
+In a SwiftUI ForEach loop like so:
+
+```swift
+ForEach(["A", "B", "C"], id: \.self) { item in
+    Text(item)
+}
+```
+
+`\.self` is known as a key path, or an indicator to swiftui how to uniquely identify each element in the collection.
+
+Key paths can be any `hashable` value to the object. For example, if you're iterating through structs, you can use any of its properties as a key path if it's `hashable`
+- granted, this `hashable` value has to be unique across all of the examples.
